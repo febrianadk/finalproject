@@ -115,6 +115,39 @@ public class Preprocess {
         return medianFilterBitmap;
     }
 
+    /*Deteksi Warna Iris dan Putih Sclera*/
+
+    public Bitmap getDeteksiIrisSclera(Bitmap bitmap) {
+        Bitmap deteksi_iris_scleraBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.RGB_565);
+        Canvas cDeteksiIrisSclera = new Canvas(deteksi_iris_scleraBitmap);
+        cDeteksiIrisSclera.drawBitmap(deteksi_iris_scleraBitmap, 0, 0, new Paint());
+
+        Bitmap gray = null;
+
+        gray = bitmap.copy(bitmap.getConfig(), true);
+
+        int lebar = gray.getWidth();
+        int tinggi = gray.getHeight();
+        //Mencari putih bukan putih
+        for (int x = 0; x < lebar; x++)
+            for (int y = 0; y < tinggi; y++) {
+                int w = gray.getPixel(x, y);
+                int r = Color.red(w);
+                int g = Color.green(w);
+                int b = Color.blue(w);
+                if (r >= 200 && g >= 200 && b >= 200) {
+                    int warnabaru = Color.rgb(255, 255, 255);
+                    gray.setPixel(x, y, warnabaru);
+                } /*else {
+
+
+                } else if {
+
+                }*/
+            }
+        return deteksi_iris_scleraBitmap;
+    }
+
     /* -- Sharpen -- */
     public Bitmap getSharpen(Bitmap bitmap) {
         Bitmap sharpenBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.RGB_565);
@@ -583,26 +616,11 @@ public class Preprocess {
         cSobel.drawBitmap(sobelBitmap, 0, 0, new Paint());
 
         int[] h = new int[9];
-        h[0] = -1;
-        h[1] = -2;
-        h[2] = -1;
-        h[3] = 0;
-        h[4] = 0;
-        h[5] = 0;
-        h[6] = 1;
-        h[7] = 2;
-        h[8] = 1;
-
+        h[0] = -1; h[1] = -2; h[2] = -1; h[3] = 0; h[4] = 0;
+        h[5] = 0;  h[6] = 1;  h[7] = 2; h[8] = 1;
         int[] v = new int[9];
-        v[0] = 1;
-        v[1] = 0;
-        v[2] = -1;
-        v[3] = 2;
-        v[4] = 0;
-        v[5] = -2;
-        v[6] = 1;
-        v[7] = 0;
-        v[8] = -1;
+        v[0] = 1;  v[1] = 0; v[2] = -1; v[3] = 2; v[4] = 0;
+        v[5] = -2; v[6] = 1; v[7] = 0; v[8] = -1;
 
         for (int x = 0; x < bitmap.getWidth(); x++) {
             for (int y = 0; y < bitmap.getHeight(); y++) {
@@ -732,7 +750,6 @@ public class Preprocess {
                 }
             }
         }
-
         return segmentationBitmap;
     }
 

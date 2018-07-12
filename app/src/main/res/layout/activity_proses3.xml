@@ -21,91 +21,186 @@
         tools:context="com.it.febrianadk.camera.Proses3Activity" >
 
         <TextView
-            android:id="@+id/textView_Try1"
+            android:id="@+id/tv_gambarasli"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="Try 1"
+            android:text="Gambar Asli"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/gambar_Try1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/iv_gambarasli"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_Try1"
+            android:layout_below="@+id/tv_gambarasli"
             android:gravity="center_vertical|center_horizontal"/>
 
         <TextView
-            android:id="@+id/textView_Try2"
+            android:id="@+id/tv_medianfilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/gambar_Try1"
+            android:layout_below="@+id/iv_gambarasli"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Try 2"
+            android:text="Median Filter"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/gambar_Try2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/iv_medianfilter"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_Try2"
+            android:layout_below="@+id/tv_medianfilter"
             android:gravity="center_vertical|center_horizontal"/>
 
         <TextView
-            android:id="@+id/textView_Try3"
+            android:id="@+id/tv_sharpness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/gambar_Try2"
+            android:layout_below="@+id/iv_medianfilter"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Try 3"
+            android:text="Sharpness"
             android:textColor="#000000"
             android:textSize="20dp"/>
 
         <ImageView
-            android:id="@+id/gambar_Try3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/iv_sharpness"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_Try3"
+            android:layout_below="@+id/tv_sharpness"
             android:gravity="center_vertical|center_horizontal" />
 
-        <TextView
-            android:id="@+id/textView_Try4"
+        <!--<TextView
+            android:id="@+id/tv_deteksi_pthsclera_iris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/gambar_Try3"
+            android:layout_below="@+id/iv_sharpness"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Try 4"
+            android:text="Deteksi Iris dan Putih Sclera"
+            android:textColor="#000000"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:id="@+id/iv_deteksi_pthsclera_iris"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_deteksi_pthsclera_iris"
+            android:gravity="center_vertical|center_horizontal" />-->
+
+        <TextView
+            android:id="@+id/tv_grayscale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/iv_sharpness"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Grayscale"
+            android:textColor="#000000"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:id="@+id/iv_grayscale"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_grayscale"
+            android:gravity="center_vertical|center_horizontal" />
+
+
+        <TextView
+            android:id="@+id/tv_deteksitepi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/iv_grayscale"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Deteksi Tepi"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/gambar_Try4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/iv_deteksitepi"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_Try4"
+            android:layout_below="@+id/tv_deteksitepi"
             android:gravity="center_vertical|center_horizontal"  />
 
+        <TextView
+            android:id="@+id/tv_binerisasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/iv_deteksitepi"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Binerisasi"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/iv_binerisasi"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_binerisasi"
+            android:gravity="center_vertical|center_horizontal"  />
+
+        <TextView
+            android:id="@+id/tv_segmentasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/iv_binerisasi"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Segmentasi"
+            android:textColor="#B3EEF9"
+            android:textSize="20dp" />
+
+        <!--<ImageView
+            android:id="@+id/iv_segmentasi"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_segmentasi"
+            android:gravity="center_vertical|center_horizontal"  />-->
+
+        <TextView
+            android:id="@+id/tv_result3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_binerisasi"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Hasil : "
+            android:textColor="#B3EEF9"
+            android:textSize="20dp" />
+
         <Button
-            android:id="@+id/button_Next_Result"
-            android:layout_width="200dp"
+            android:id="@+id/button_Back_Mulai3"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/gambar_Try4"
+            android:background="#303F9F"
+            android:text="Back"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/button_Next_finalresult"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:background="#303F9F"
             android:text="Next"
             android:textColor="#FFFFFF" />
-
-
 
     </RelativeLayout>
 </ScrollView>

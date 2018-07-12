@@ -11,6 +11,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="100dp"
-        android:src="@drawable/coronary_hearth_logo" />
+        android:src="@drawable/coronary_heart_logo" />
 
 </RelativeLayout>

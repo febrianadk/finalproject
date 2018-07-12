@@ -2,6 +2,7 @@ package com.it.febrianadk.camera;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -14,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +36,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class MulaiProses3Activity extends AppCompatActivity {
-
 
     private static final int PICK_FROM_CAMERA= 1;
     private static final int PICK_FROM_GALLERY = 2;
@@ -146,15 +147,17 @@ public class MulaiProses3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mulai_proses3);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        check = (Button) findViewById(R.id.checkBtn2);
-        capture = (Button) findViewById(R.id.captureBtn2);
-        resultImage = (ImageView) findViewById(R.id.resultImage2);
-        resultImage.setImageBitmap(null);
-        alertText = (TextView) findViewById(R.id.alertText2);
-        resultText = (TextView) findViewById(R.id.resultText2);
-//////////
+        check = (Button) findViewById(R.id.checkBtn);
+        capture = (Button) findViewById(R.id.captureBtn);
+        resultImage = (ImageView) findViewById(R.id.resultImage);
+        alertText = (TextView) findViewById(R.id.alertText);
+        resultText = (TextView) findViewById(R.id.resultText);
+
+
+
         final String[] option = new String[] { "Take from Camera", "Select from Gallery","Cancel" };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, option);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -162,6 +165,7 @@ public class MulaiProses3Activity extends AppCompatActivity {
         builder.setTitle("Select Option");
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 
+            @TargetApi(Build.VERSION_CODES.M)
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 Log.e("Selected Item", String.valueOf(which));
@@ -235,7 +239,6 @@ public class MulaiProses3Activity extends AppCompatActivity {
                 resultImage.setImageBitmap(gambarutuh);
             }
             else{
-
                 byte[] byteArray2 = getIntent().getByteArrayExtra("gambarutuh");
                 gambarutuh = BitmapFactory.decodeByteArray(byteArray2, 0, byteArray2.length);
                 apublik=  gambarutuh.copy(gambarutuh.getConfig(), true);
@@ -243,7 +246,6 @@ public class MulaiProses3Activity extends AppCompatActivity {
                 alertText.setVisibility(View.INVISIBLE);
                 resultImage.setImageBitmap(gambarutuh);
             }
-
         }
         check.setOnClickListener(new View.OnClickListener() {
 
@@ -253,61 +255,24 @@ public class MulaiProses3Activity extends AppCompatActivity {
 
                     try {
 
-                        if(flagGalatauCam==0){
-                            ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
-                            gambarutuh.compress(Bitmap.CompressFormat.PNG, 100, stream2);
-                            //apublik.recycle();
-                            byte[] byteArray2 = stream2.toByteArray();
+                        ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+                        gambarutuh.compress(Bitmap.CompressFormat.PNG, 100, stream2);
+                        //apublik.recycle();
+                        byte[] byteArray2 = stream2.toByteArray();
 
-                            Intent i = new Intent(MulaiProses3Activity.this, ProsesActivity.class);
+                        Intent i = new Intent(MulaiProses3Activity.this, Proses3Activity.class);
 
-                            i.putExtra("gambarutuh", byteArray2);
-                            i.putExtra("flagGalatauCam", flagGalatauCam);
-                            //i.putExtra("flag", 1);
+                        i.putExtra("gambarutuh", byteArray2);
+                        i.putExtra("flagGalatauCam", flagGalatauCam);
+                        //i.putExtra("flag", 1);
 
-                            stream2.close();
-                            startActivity(i);
-                        }
-                        else{
-
-                            ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
-                            gambarutuh.compress(Bitmap.CompressFormat.PNG, 100, stream2);
-
-                            byte[] byteArray2 = stream2.toByteArray();
-
-                            Intent i = new Intent(MulaiProses3Activity.this, Proses3Activity.class);
-
-                            i.putExtra("gambarutuh", byteArray2);
-                            i.putExtra("flagGalatauCam", flagGalatauCam);
-
-                            stream2.close();
-                            startActivity(i);
-                        }
+                        stream2.close();
+                        startActivity(i);
 
                     }
                     catch (Exception e){};
                 }
             }
-            /*public void onClick(View view) {
-                if (img != null) {
-                    img.recycle();
-                    img = null;
-                }
-
-                img = BitmapFactory.decodeFile(picturePath, options);
-                img = Bitmap.createScaledBitmap(img, 600, 450, true);//500,680
-                Bitmap a = img.copy(img.getConfig(), true);
-                resultImage.setImageBitmap(img);
-                alertText.setText("");
-
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                a.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                Intent i = new Intent(MulaiActivity.this, ProsesActivity.class);
-                i.putExtra("BitmapImage", byteArray);
-                //i.putExtra("flag", 1);
-                startActivity(i);
-            }*/
         });
 
     }
@@ -417,7 +382,6 @@ public class MulaiProses3Activity extends AppCompatActivity {
             // indicate image type and Uri
             File f = new File(picUri);
 
-
             Uri contentUri = Uri.fromFile(f);
 
 
@@ -476,7 +440,6 @@ public class MulaiProses3Activity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     @Override
@@ -486,10 +449,4 @@ public class MulaiProses3Activity extends AppCompatActivity {
         startActivity(back);
     }
 
-
-   /* @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mulai_proses3);
-    }*/
 }

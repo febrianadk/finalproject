@@ -17,7 +17,7 @@ Button button,button2,button3, button4;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//ini button
+
         button=(Button)findViewById(R.id.button);
         button2=(Button)findViewById(R.id.button2);
         button3=(Button)findViewById(R.id.button3);

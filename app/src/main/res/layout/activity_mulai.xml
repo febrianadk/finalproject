@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:paddingStart="10dp"
-            android:text="Coronary Hearth Detection"/>
+            android:text="Coronary Heart Detection"/>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

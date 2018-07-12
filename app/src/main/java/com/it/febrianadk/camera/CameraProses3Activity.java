@@ -18,6 +18,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,13 +28,13 @@ import java.util.Calendar;
 
 public class CameraProses3Activity extends Activity {
 
-    ImageView captureButton2,flashButton2,target2;
+    ImageView captureButton,flashButton,target;
     FrameLayout frame;
     Camera camera;
     Activity context;
     PreviewCamera previewCamera;
     Camera.Parameters params;
-    String path = "/sdcard/Coronary Hearth Detection/";
+    String path = "/sdcard/Coronary Heart Detection/";
     Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
 
         @Override
@@ -76,9 +77,9 @@ public class CameraProses3Activity extends Activity {
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 5;
 
-            options.inPurgeable = true;      //Tell to gc that whether it needs free memory, the Bitmap can be cleared
+            options.inPurgeable = true;                   //Tell to gc that whether it needs free memory, the Bitmap can be cleared
 
-            options.inInputShareable = true; //Which kind of reference will be used to recover the Bitmap data after being clear, when it will be used in the future
+            options.inInputShareable = true;              //Which kind of reference will be used to recover the Bitmap data after being clear, when it will be used in the future
 
 
             Bitmap realImage = BitmapFactory.decodeByteArray(data, 0, data.length, options);
@@ -134,6 +135,7 @@ public class CameraProses3Activity extends Activity {
             } catch (Exception e) {
 
             }
+
         }
     };
     private boolean isFlashOn = false;
@@ -147,34 +149,35 @@ public class CameraProses3Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera_proses3);
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera_proses3);
+        setContentView(R.layout.activity_camera);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         context = this;
 
-        captureButton2 = (ImageView) findViewById(R.id.captureButton2);
+        captureButton = (ImageView) findViewById(R.id.captureButton);
 
-        flashButton2 = (ImageView) findViewById(R.id.flashButton2);
-        target2=(ImageView) findViewById(R.id.camera_target3);
+        flashButton = (ImageView) findViewById(R.id.flashButton);
+        target=(ImageView) findViewById(R.id.camera_target2);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int lebarlayar = displayMetrics.widthPixels;
 
-        target2.getLayoutParams().width = (int)(1.0/4.0*lebarlayar);
-        target2.getLayoutParams().height = (int)(1.0/4.0*lebarlayar);
+        target.getLayoutParams().width = (int)(1.0/4.0*lebarlayar);
+        target.getLayoutParams().height = (int)(1.0/4.0*lebarlayar);
 
-        previewCamera = new PreviewCamera(this, (SurfaceView) findViewById(R.id.surfaceView2));
+        previewCamera = new PreviewCamera(this, (SurfaceView) findViewById(R.id.surfaceView));
 
         frame = (FrameLayout) findViewById(R.id.frameLayout);
+       // Toast.makeText(this, "cekk", Toast.LENGTH_SHORT).show();
+      //  frame.removeAllViews(); //clear image
+
         frame.addView(previewCamera);
         previewCamera.setKeepScreenOn(true);
 
         camera = Camera.open();
         params = camera.getParameters();
 
-        captureButton2.setOnClickListener(new View.OnClickListener() {
+
+        captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -184,17 +187,17 @@ public class CameraProses3Activity extends Activity {
             }
         });
 
-        flashButton2.setOnClickListener(new View.OnClickListener() {
+        flashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isFlashOn) {
-                    flashButton2.setImageResource(R.drawable.camera_flash_on);
+                    flashButton.setImageResource(R.drawable.camera_flash_on);
                     params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
                     camera.setParameters(params);
                     camera.startPreview();
                     isFlashOn = false;
                 } else {
-                    flashButton2.setImageResource(R.drawable.camera_flash_off);
+                    flashButton.setImageResource(R.drawable.camera_flash_off);
                     params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
                     camera.setParameters(params);
                     camera.startPreview();
@@ -206,6 +209,7 @@ public class CameraProses3Activity extends Activity {
 
     public void takeFocusedPicture() {
         camera.autoFocus(mAutoFocusCallback);
+
     }
 
     private void releaseCameraAndPreview() {

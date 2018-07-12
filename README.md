@@ -1,2 +1,0 @@
-# finalproject
-iridology sclerology

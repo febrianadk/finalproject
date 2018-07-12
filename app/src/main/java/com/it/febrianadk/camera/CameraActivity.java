@@ -32,7 +32,7 @@ public class CameraActivity extends Activity {
     Activity context;
     PreviewCamera previewCamera;
     Camera.Parameters params;
-    String path = "/sdcard/Coronary Hearth Detection/";
+    String path = "/sdcard/Coronary Heart Detection/";
     Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
 
         @Override

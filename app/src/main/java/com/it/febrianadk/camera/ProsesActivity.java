@@ -22,17 +22,19 @@ import java.io.IOException;
 
 public class ProsesActivity extends AppCompatActivity {
 
-    Bitmap gray=null,putih2=null,newgambar=null;Bitmap img=null;
+    Bitmap gray=null,putih2=null;
     Bitmap areairis =null,areaNormalisasiCrop,areaIrisBersih;
     Bitmap areaIrisLingkaranLuar=null;
+
     ImageView ivDeteksiWarnaSklera,ivCropBiner,ivPutih,gambarasli,ivCrop,
-            ivCropPlusLingkaran,ivLingkarHitamLuar,ivNormalisasi,ivNormalisasiCrop,
-            ivColorDetection,ivBagiSudut,ivNormalisasiBagi;
-    TextView tvJumlahPutih,tvPosisiPutih,tvKolesterol,tvJumlahPutihTotal,resultText;
-    int posisihasilputih=0;
+            ivLingkarHitamLuar,ivNormalisasi,ivNormalisasiCrop,
+            ivColorDetection;
+    TextView tvJumlahPutih,tvKolesterol,tvJumlahPutihTotal,resultText;
+
     int Rbesar = 0;
     int hxputih [];
-    int flagGalatauCam=0,hasil=0;
+    int flagGalatauCam=0;
+
     Button buttonBackprocess, buttonNextprocess;
     Bitmap resized=null, gambarutuh=null;
     ProgressDialog progress;
@@ -56,9 +58,9 @@ public class ProsesActivity extends AppCompatActivity {
         ivDeteksiWarnaSklera=(ImageView)findViewById(R.id.ivDeteksiWarnaSklera);
         gambarasli=(ImageView)findViewById(R.id.gambarasli);
         ivCrop=(ImageView)findViewById(R.id.ivCrop);
-
         buttonBackprocess=(Button)findViewById(R.id.buttonBackprocess);
         buttonNextprocess=(Button)findViewById(R.id.buttonNextprocess);
+
         buttonBackprocess.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -94,13 +96,11 @@ public class ProsesActivity extends AppCompatActivity {
                         string.putExtra("gambarutuh", byteArray2);
                         string.putExtra("flagGalatauCam", flagGalatauCam);
 
-
                         startActivity(string);
                     }
 
                 }
                 catch (Exception e){}
-
             }
         });
 
@@ -108,9 +108,7 @@ public class ProsesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     if(areaIrisLingkaranLuar != null) {
-
                         Intent string = new Intent(ProsesActivity.this, Proses2Activity.class);
-
                         startActivity(string);
                     } else{
                         Log.d("ProsesActivity", "Bitmap Kosong");
@@ -118,9 +116,6 @@ public class ProsesActivity extends AppCompatActivity {
             }
         });
 
-    //    ivBagiSudut=(ImageView)findViewById(R.id.ivBagiSudut);
-     //   ivNormalisasiBagi=(ImageView)findViewById(R.id.ivNormalisasiBagi);
-    //    tvPosisiPutih =(TextView)findViewById(R.id.tvPosisiPutih);
         tvKolesterol =(TextView)findViewById(R.id.tvKolesterol);
         tvJumlahPutih =(TextView)findViewById(R.id.tvJumlahPutih);
         tvJumlahPutihTotal =(TextView)findViewById(R.id.tvJumlahPutihTotal);
@@ -133,7 +128,6 @@ public class ProsesActivity extends AppCompatActivity {
         if(getIntent().hasExtra("flagGalatauCam")){
             flagGalatauCam=getIntent().getIntExtra("flagGalatauCam",0);
         }
-
         if(flagGalatauCam==0){
             byte[] byteArray2 = getIntent().getByteArrayExtra("gambarutuh");
             gambarutuh = BitmapFactory.decodeByteArray(byteArray2, 0, byteArray2.length); //nyalakan
@@ -150,7 +144,6 @@ public class ProsesActivity extends AppCompatActivity {
         progress.setMessage("Wait while loading...");
         progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
         new LoadViewTask2().execute(); //Nyalakan
-
     }
 
     @Override
@@ -187,7 +180,6 @@ public class ProsesActivity extends AppCompatActivity {
             untukIVCROP= untukIVPUTIH.copy(untukIVPUTIH.getConfig(), true);
             Lingkaranluar(putih);
         }
-
     }
 
     public void getBinerization (Bitmap bitmap){
@@ -211,9 +203,7 @@ public class ProsesActivity extends AppCompatActivity {
             }
         }
 
-
         //////////////// deteksi warna putih iris///////////
-
         for (int x = 0; x < cropBmp.getWidth(); x++)
         {
             for (int y = 0; y < cropBmp.getHeight(); y++)
@@ -260,7 +250,7 @@ public class ProsesActivity extends AppCompatActivity {
             }
         }
         untukIVPUTIH= binerBmp.copy(binerBmp.getConfig(), true);
-            getCrop1(binerBmp);
+        getCrop1(binerBmp);
     }
 
     private void autoCropuntukgalery(Bitmap bitmap) {
@@ -280,7 +270,6 @@ public class ProsesActivity extends AppCompatActivity {
 
         int[] horizontal= new int[bitmap.getWidth()];
 
-
         //inisialisasi nilai horizontal dan vertical
         for(int i=0; i<bitmap.getWidth(); i++)
             horizontal[i]=0;
@@ -295,7 +284,7 @@ public class ProsesActivity extends AppCompatActivity {
                 }
             }
         }
-        ///////////////////////////find point
+        ///////////////////////////find point/////////////////////////////////
 
         Bitmap bmp_point1 = gambaraslicrop;
         int leftPoint = 0, rightPoint = 0, topPoint = 0, bottomPoint = 0;
@@ -352,8 +341,7 @@ public class ProsesActivity extends AppCompatActivity {
                 }
             }
         }
-
-        //////////top////////
+        ////////////////////top/////////////////////////////////////////
         Thresholdperubahan=0;
         perubahan=0;
         for (int i = top; i <= mid_top_bottom; i++)
@@ -365,7 +353,6 @@ public class ProsesActivity extends AppCompatActivity {
                 topPoint = i;
                 //break;
             }
-
         }
         //////////bottom////////
          Thresholdperubahan=0;
@@ -425,7 +412,6 @@ public class ProsesActivity extends AppCompatActivity {
         int maxkiri = 0, maxkanan = 0, puncakkiriv = 0, puncakkananv = 0;
         int maxkiri1 = 0, maxkanan1 = 0,puncakkirih = 0, puncakkananh = 0;
         int kiriatasx = 0, kiriatasy = 0, kananbawahx = 0, kananbawahy = 0;
-        int bataskiriatasy,bataskananbawahy,bataskiriatasx,bataskananbawahx,penambahkananbawahx;
 
         //integral proyeksi horisontal
         int hx1[] = new int[putihbukanputih.getWidth()];
@@ -440,15 +426,13 @@ public class ProsesActivity extends AppCompatActivity {
 
             }
         }
-
         for (j = 0; j < hx1.length / 2; j++)
         {
-            if (j > (hx1.length / 2)-((hx1.length / 3)/2)/*250*/) {
+            if (j > (hx1.length / 2)-((hx1.length / 3)/2)) {
 
             }
             else {
-                if (hx1[j] > maxkiri1)
-                {
+                if (hx1[j] > maxkiri1) {
                     maxkiri1 = hx1[j];
                     puncakkirih = j;
                 }
@@ -457,18 +441,18 @@ public class ProsesActivity extends AppCompatActivity {
 
         for (j = hx1.length / 2; j < hx1.length; j++)
         {
-            if (j < (hx1.length / 2)+((hx1.length / 3)/2)/*350*/) {
+            if (j < (hx1.length / 2)+((hx1.length / 3)/2)) {
 
             }
             else  {
-                if (hx1[j] > maxkanan1)
-                {
+                if (hx1[j] > maxkanan1) {
                     maxkanan1 = hx1[j];
                     puncakkananh = j;
                 }
             }
         }
         /////integral proyeksi vertikal
+
         //dicari integral proyeksi vertikal dulu, trus dicrop tingginya dulu
         int hy1[] = new int[putihbukanputih.getHeight()];
 
@@ -484,7 +468,6 @@ public class ProsesActivity extends AppCompatActivity {
         for (j = 0; j < hy1.length / 2; j++)
         {
             if (j > (hy1.length / 2)-((hx1.length / 3)/2)) { }
-            ///if (j > (hy1.length / 2)-100) { }
             else
             {
                 if (hy1[j] > maxkiri)
@@ -496,12 +479,12 @@ public class ProsesActivity extends AppCompatActivity {
         }
         for (j = hy1.length / 2; j < hy1.length;j++)
         {
-            if (j < (hy1.length / 2)+((hx1.length / 3)/2)) { }
+            if (j < (hy1.length / 2)+((hx1.length / 3)/2)) {
 
+            }
             else
             {
-                if (hy1[j] > maxkanan)
-                {
+                if (hy1[j] > maxkanan)  {
                     maxkanan = hy1[j];
                     puncakkananv = j;//batas bawah
                 }
@@ -518,7 +501,6 @@ public class ProsesActivity extends AppCompatActivity {
         untukIVCROP=areairis.copy(areairis.getConfig(), true);
 
         Lingkaranluar(areaIrisBersih);
-
     }
 
     public void pluslingkaran(Bitmap gambarAreaIris) {
@@ -595,9 +577,7 @@ public class ProsesActivity extends AppCompatActivity {
             for (int j = Rbesar-1; j >= 0; j--)
             {
                 int newpixelColor = Color.rgb(nilaigambar[k][ 0], nilaigambar[k][ 1], nilaigambar[k][ 2]);
-
                 kotaksip.setPixel(i, j, newpixelColor);
-
                 k++;
             }
         }
@@ -672,67 +652,59 @@ public class ProsesActivity extends AppCompatActivity {
 
     private class LoadViewTask2 extends AsyncTask<Void, Integer, Void>
     {
-        //Before running code in the separate thread
-        @Override
-        protected void onPreExecute()
-        {
-
-            progress.show();
-        }
-        @Override
-        protected Void doInBackground(Void... params)
-        {
-            if(putih2!=null) {
-                if(flagGalatauCam==0){//kalau 1 kamera
-
-                    gambaraslicrop = putih2.copy(putih2.getConfig(), true);
-                    getBinerization(putih2);
-                }
-                else{
-                    gambaraslicrop = putih2.copy(putih2.getConfig(), true);
-                    getBinerization(putih2); //buka lagi
-                }
-
-
-
-            }
-            return null;
-        }
-
-        //Update the TextView and the progress at progress bar
-        @Override
-        protected void onProgressUpdate(Integer... values)
-        {
-
-        }
-
-        @Override
-        protected void onPostExecute(Void result)
-        {
-            if(progress.isShowing())
+            //Before running code in the separate thread
+            @Override
+            protected void onPreExecute()
             {
-                progress.dismiss();
+                    progress.show();
             }
-            if(putih2!=null) {
-                gambarasli.setImageBitmap(gambarutuh);
+            @Override
+            protected Void doInBackground(Void... params)
+            {
+                if(putih2!=null) {
+                    if(flagGalatauCam==0){//kalau 1 kamera
 
-                ivPutih.setImageBitmap(untukIVPUTIH);
-                ivCrop.setImageBitmap(untukIVCROP);
-                ivLingkarHitamLuar.setImageBitmap(untukLINGKARLUAR);
-                ivNormalisasi.setImageBitmap(untukIVNORMALISASI);
-                ivNormalisasiCrop.setImageBitmap(untukIVNORMALISASICROP);
-                ivColorDetection.setImageBitmap(untukIVCOLORDETECTION);
-             //   ivNormalisasiBagi.setImageBitmap(untukIVNORMALISASIBAGI);
-             //   ivBagiSudut.setImageBitmap(untukIVBAGISUDUT);
-                tvJumlahPutih.setText(untukTVJUMLAHPUTIH);
-                tvJumlahPutihTotal.setText(untuktvJumlahPutihTotal);
-                tvKolesterol.setText(untuktvKolesterol);
-             //   tvPosisiPutih.setText(untuktvPosisiPutih);
-                ivCropBiner.setImageBitmap(untukIVCROPBINER);
-                ivDeteksiWarnaSklera.setImageBitmap(untukIVDETEKSIWARNASKLERA);
+                        gambaraslicrop = putih2.copy(putih2.getConfig(), true);
+                        getBinerization(putih2);
+                    }
+                    else{
+                        gambaraslicrop = putih2.copy(putih2.getConfig(), true);
+                        getBinerization(putih2); //buka lagi
+                    }
+
+                }
+                return null;
+            }
+
+            //Update the TextView and the progress at progress bar
+            @Override
+            protected void onProgressUpdate(Integer... values)
+            {
+
+            }
+
+            @Override
+            protected void onPostExecute(Void result)
+            {
+                if(progress.isShowing())
+                {
+                    progress.dismiss();
+                }
+                if(putih2!=null) {
+                    gambarasli.setImageBitmap(gambarutuh);
+
+                    ivPutih.setImageBitmap(untukIVPUTIH);
+                    ivCrop.setImageBitmap(untukIVCROP);
+                    ivLingkarHitamLuar.setImageBitmap(untukLINGKARLUAR);
+                    ivNormalisasi.setImageBitmap(untukIVNORMALISASI);
+                    ivNormalisasiCrop.setImageBitmap(untukIVNORMALISASICROP);
+                    ivColorDetection.setImageBitmap(untukIVCOLORDETECTION);
+                    tvJumlahPutih.setText(untukTVJUMLAHPUTIH);
+                    tvJumlahPutihTotal.setText(untuktvJumlahPutihTotal);
+                    tvKolesterol.setText(untuktvKolesterol);
+                    ivCropBiner.setImageBitmap(untukIVCROPBINER);
+                    ivDeteksiWarnaSklera.setImageBitmap(untukIVDETEKSIWARNASKLERA);
             }
         }
-
     }
-
 }

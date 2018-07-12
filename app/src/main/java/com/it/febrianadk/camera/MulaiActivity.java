@@ -2,6 +2,7 @@ package com.it.febrianadk.camera;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -14,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
@@ -161,6 +163,7 @@ public class MulaiActivity extends AppCompatActivity {
         builder.setTitle("Select Option");
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 
+            @TargetApi(Build.VERSION_CODES.M)
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 Log.e("Selected Item", String.valueOf(which));
@@ -209,17 +212,15 @@ public class MulaiActivity extends AppCompatActivity {
                 }
                 cropBitmap=resize(cropBitmap, 350,350);
                 gambarutuh = cropBitmap.copy(cropBitmap.getConfig(), true);
-                //apublik=captureImage.copy(captureImage.getConfig(), true);;
+
                 apublik = cropBitmap.copy(cropBitmap.getConfig(), true);
-               /* Toast.makeText(this, "GambarUTUH: "+apublik.getWidth()+" "+ apublik.getHeight(), Toast.LENGTH_LONG).show();*/
 
                 flagGalatauCam = 1;
                 resultImage.setImageBitmap(gambarutuh);
                 alertText.setVisibility(View.INVISIBLE);
-                //BitmapData.bitmap = cropBitmap;
+
             } else {
-              //  Toast.makeText(this, " ", Toast.LENGTH_LONG).show();
-                //Toast.makeText(this, "Gagal di kamera", Toast.LENGTH_LONG).show();
+
             }
         }
 
@@ -236,7 +237,6 @@ public class MulaiActivity extends AppCompatActivity {
                 resultImage.setImageBitmap(gambarutuh);
             }
             else{
-
                 byte[] byteArray2 = getIntent().getByteArrayExtra("gambarutuh");
                 gambarutuh = BitmapFactory.decodeByteArray(byteArray2, 0, byteArray2.length);
                 apublik=  gambarutuh.copy(gambarutuh.getConfig(), true);
@@ -244,7 +244,6 @@ public class MulaiActivity extends AppCompatActivity {
                 alertText.setVisibility(View.INVISIBLE);
                 resultImage.setImageBitmap(gambarutuh);
             }
-
         }
         check.setOnClickListener(new OnClickListener() {
 
@@ -418,7 +417,6 @@ public class MulaiActivity extends AppCompatActivity {
             // indicate image type and Uri
             File f = new File(picUri);
 
-
             Uri contentUri = Uri.fromFile(f);
 
 
@@ -431,6 +429,8 @@ public class MulaiActivity extends AppCompatActivity {
             // indicate output X and Y
             cropIntent.putExtra("outputX", 350);
             cropIntent.putExtra("outputY", 350);
+
+            /*cropIntent.putExtra("circleCrop", true);*/
 
             // retrieve data on return
             cropIntent.putExtra("return-data", true);
@@ -477,7 +477,6 @@ public class MulaiActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     @Override

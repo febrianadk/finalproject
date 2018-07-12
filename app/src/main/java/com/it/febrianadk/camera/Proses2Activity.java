@@ -16,7 +16,7 @@ public class Proses2Activity extends AppCompatActivity {
 
     public Button button_Back_proses2, button_Next_proses3;
     private Bitmap newBitmap=null, tempBitmap, tempBitmap2;
-    private ImageView gambar_crop_lingkaran,  gambar_grayscale, gambar_sobel,
+    private ImageView gambar_crop_lingkaran, gambar_grayscale, gambar_sobel,
             gambar_segmentasi, gambar_ROI;
     private Preprocess preprocess;
     private TextView tes, textView_Result2;
@@ -43,7 +43,6 @@ public class Proses2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent m = new Intent(Proses2Activity.this, MulaiProses3Activity.class);
-                finish();
                 startActivity(m);
             }
         });
@@ -179,8 +178,7 @@ public class Proses2Activity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                //progressImage.dismiss();
-//                relativeLayout.setVisibility(View.GONE);
+
             }
         }.execute();
     }

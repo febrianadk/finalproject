@@ -24,15 +24,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
-public class CameraActivity extends Activity {
+public class CameraProses4Activity extends Activity {
 
-    ImageView captureButton,target, flashButton;
+    ImageView captureButton,target,flashButton;
     FrameLayout frame;
     Camera camera;
     Activity context;
     PreviewCamera previewCamera;
     Camera.Parameters params;
-    String path = "/sdcard/Coronary Heart Detection/";
+    String path = "/sdcard/Coronary Heart Detection/Cardiac Veins/";
     Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
 
         @Override
@@ -110,13 +110,13 @@ public class CameraActivity extends Activity {
             }
 
             BitmapData.processed = false;
-            BitmapData.result = "Go Check Your Iris..";
+            BitmapData.result = "Go Check Your Sclera..";
 
             BitmapData.bitmap = realImage;
             releaseCameraAndPreview();
             finish();
 
-            Intent intent = new Intent(CameraActivity.this, MulaiActivity.class);
+            Intent intent = new Intent(CameraProses4Activity.this, MulaiProses3Activity.class);
             startActivity(intent);
         }
     };
@@ -132,7 +132,6 @@ public class CameraActivity extends Activity {
 
         }
     };
-
    /* private boolean isFlashOn = false;*/
 
     public static Bitmap rotate(Bitmap source, float angle) {
@@ -144,14 +143,15 @@ public class CameraActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.activity_camera_proses3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         context = this;
 
         captureButton = (ImageView) findViewById(R.id.captureButton);
 
         /*flashButton = (ImageView) findViewById(R.id.flashButton);*/
-        target=(ImageView) findViewById(R.id.camera_target2);
+        target=(ImageView) findViewById(R.id.camera_target3);
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int lebarlayar = displayMetrics.widthPixels;
@@ -162,6 +162,8 @@ public class CameraActivity extends Activity {
         previewCamera = new PreviewCamera(this, (SurfaceView) findViewById(R.id.surfaceView));
 
         frame = (FrameLayout) findViewById(R.id.frameLayout);
+       // Toast.makeText(this, "cekk", Toast.LENGTH_SHORT).show();
+
         frame.addView(previewCamera);
         previewCamera.setKeepScreenOn(true);
 
@@ -179,7 +181,7 @@ public class CameraActivity extends Activity {
             }
         });
 
-        /*flashButton.setOnClickListener(new View.OnClickListener() {
+       /* flashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isFlashOn) {
@@ -201,6 +203,7 @@ public class CameraActivity extends Activity {
 
     public void takeFocusedPicture() {
         camera.autoFocus(mAutoFocusCallback);
+
     }
 
     private void releaseCameraAndPreview() {
@@ -233,9 +236,9 @@ public class CameraActivity extends Activity {
         }
     }
 
-    private void setCameraDisplayOrientation(Activity activity, int cameraId, android.hardware.Camera camera) {
-        android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
-        android.hardware.Camera.getCameraInfo(cameraId, info);
+    private void setCameraDisplayOrientation(Activity activity, int cameraId, Camera camera) {
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        Camera.getCameraInfo(cameraId, info);
         int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
         int degrees = 0;
         switch (rotation) {

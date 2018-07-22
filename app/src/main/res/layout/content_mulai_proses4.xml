@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -15,8 +16,9 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".MulaiActivity"
-        tools:showIn="@layout/activity_mulai">
+        tools:context=".MulaiProses4Activity"
+        tools:showIn="@layout/activity_mulai_proses4"
+        >
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -25,19 +27,17 @@
             android:layout_marginBottom="10dp"
             android:background="#929292"
             android:gravity="center">
-
             <ImageView
                 android:id="@+id/resultImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
             <TextView
                 android:id="@+id/alertText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Capture the iris area !"
-                android:textColor="#929292"
+                android:text="Capture the sclera area!"
+                android:textColor="#ffebee"
                 android:textSize="20dp"
                 android:visibility="visible" />
         </FrameLayout>
@@ -65,7 +65,6 @@
                     android:text="capture"
                     android:textColor="#fff" />
 
-
                 <Button
                     android:id="@+id/checkBtn"
                     android:layout_width="wrap_content"
@@ -88,5 +87,6 @@
                 android:visibility="visible" />
 
         </LinearLayout>
+
     </RelativeLayout>
 </ScrollView>

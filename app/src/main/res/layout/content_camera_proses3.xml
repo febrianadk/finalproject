@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/flashButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -33,16 +33,15 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/flash_on_1" />
-
+                android:src="@drawable/flash_on_1" />-->
 
             <ImageView
-                android:id="@+id/camera_target"
+                android:id="@+id/camera_target3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/camera_target2_blue" />
+                android:src="@drawable/camera_target_blue" />
 
             <ImageView
                 android:id="@+id/captureButton"
@@ -50,8 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
                 android:src="@drawable/camera_button_1" />
+
 
         </RelativeLayout>
 

@@ -4,44 +4,43 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 
-public class Proses3Activity extends AppCompatActivity {
+import static com.it.febrianadk.camera.BitmapData.result;
 
-    public Button button_Next_proses4, button_Back_Mulai3;
+public class Proses4Activity extends AppCompatActivity {
+
+    public Button button_Next_proses4, button_Back_Mulai4;
     Bitmap gray=null, sclera=null;
     int flagGalatauCam=0;
     Bitmap resized=null, gambarutuh=null, gambaraslicrop=null;
     ProgressDialog progress;
     DecimalFormat df;
     private Bitmap newBitmap=null;
-    private ImageView iv_gambarasli, iv_medianfilter, iv_sharpness,iv_deteksi_pthsclera_iris,iv_grayscale,
-            iv_binerisasi, iv_deteksitepi, iv_segmentasi,iv_roi_kiri;
-    private TextView  tv_result_sclera_kiri, textRatio_sclera_kiri;
+    private ImageView iv_gambarasli, iv_medianfilter, iv_sharpness,
+            iv_deteksi_pthsclera_iris, iv_grayscale, iv_binerisasi,
+            iv_deteksitepi, iv_segmentasi, iv_roi_kanan;
+    private TextView  tv_result_sclera_kanan, textRatio_sclera_kanan;
     private RelativeLayout relativeLayout;
     private Preprocess preprocess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_proses3);
+        setContentView(R.layout.activity_proses4);
 
         newBitmap = BitmapData.bitmap;
-
         df = new DecimalFormat("##.###");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,28 +52,17 @@ public class Proses3Activity extends AppCompatActivity {
         iv_segmentasi=(ImageView)findViewById(R.id.iv_segmentasi);
         //iv_deteksi_pthsclera_iris=(ImageView)findViewById(R.id.iv_deteksi_pthsclera_iris);
         iv_grayscale=(ImageView)findViewById(R.id.iv_grayscale);
-        iv_roi_kiri=(ImageView)findViewById(R.id.iv_roi_kiri);
-        textRatio_sclera_kiri = (TextView) findViewById(R.id.textRatio_sclera_kiri);
-        tv_result_sclera_kiri =(TextView)findViewById(R.id.tv_result_sclera_kiri);
+        iv_roi_kanan=(ImageView)findViewById(R.id.iv_roi_kanan);
+        textRatio_sclera_kanan = (TextView) findViewById(R.id.textRatio_sclera_kanan);
+        tv_result_sclera_kanan =(TextView)findViewById(R.id.tv_result_sclera_kanan);
 
         button_Next_proses4=(Button)findViewById(R.id.button_Next_proses4);
-        button_Back_Mulai3=(Button)findViewById(R.id.button_Back_Mulai3);
+        button_Back_Mulai4=(Button)findViewById(R.id.button_Back_Mulai4);
 
-        /////Next button proses//////
-        button_Next_proses4.setOnClickListener(new View.OnClickListener() {
+        button_Back_Mulai4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent m = new Intent(Proses3Activity.this, MulaiProses4Activity.class);
-                startActivity(m);
-            }
-        });
-        /////////////////////////////
-
-        button_Back_Mulai3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent string = new Intent(Proses3Activity.this, MulaiProses3Activity.class);
-               // startActivity(string);
+                Intent string = new Intent(Proses4Activity.this, MulaiProses4Activity.class);
                 try{
 
                     if(flagGalatauCam==0){
@@ -101,9 +89,25 @@ public class Proses3Activity extends AppCompatActivity {
 
                         startActivity(string);
                     }
+
                 }catch (Exception e){}
             }
         });
+
+
+        /////Next button proses//////
+        /*button_Next_proses4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent m = new Intent(Proses4Activity.this,ResultActivity.class);
+                startActivity(m);
+
+                *//*Intent resultSclera = new Intent(getApplicationContext(), ResultActivity.class);
+                resultSclera.putExtra("var_ScleraKanan", result);
+                startActivity(resultSclera);*//*
+            }
+        });*/
+        /////////////////////////////
 
 
         if(getIntent().hasExtra("flagGalatauCam")){
@@ -121,7 +125,7 @@ public class Proses3Activity extends AppCompatActivity {
             sclera = gambarutuh.copy(gambarutuh.getConfig(), true);
         }
 
-        progress = new ProgressDialog(Proses3Activity.this);
+        progress = new ProgressDialog(Proses4Activity.this);
         progress.setTitle("Loading");
         progress.setMessage("Wait while loading...");
         progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
@@ -131,12 +135,13 @@ public class Proses3Activity extends AppCompatActivity {
         BitmapData.processed=true;
     }
 
-    ////onResume
+    ////onResume/////////////////
     @Override
     protected void onResume() {
         super.onResume();
     }
 
+    ///Proses Background////////////
     public void process() {
 
         new AsyncTask<Void, Void, Void>() {
@@ -213,19 +218,19 @@ public class Proses3Activity extends AppCompatActivity {
                 });
 
                 //segmentasi coronary artery (sclera kiri)
-                final Bitmap finalSegmentationKiri = preprocess.getSegmentationKiri(finalBinarizationBitmap);
+                final Bitmap finalSegmentationKanan = preprocess.getSegmentationKanan(finalBinarizationBitmap);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        iv_segmentasi.setImageBitmap(finalSegmentationKiri);
+                        iv_segmentasi.setImageBitmap(finalSegmentationKanan);
                     }
                 });
 
-                final Bitmap finalROIkiri = preprocess.getROIkiri(finalBinarizationBitmap);
+                final Bitmap finalROIkanan = preprocess.getROIkanan(finalBinarizationBitmap);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        iv_roi_kiri.setImageBitmap(finalROIkiri);
+                        iv_roi_kanan.setImageBitmap(finalROIkanan);
                     }
                 });
 
@@ -237,19 +242,19 @@ public class Proses3Activity extends AppCompatActivity {
                     }
                 });*/
 
-                final Double[] ratio = preprocess.getRatio(finalROIkiri);
+                final Double[] ratio = preprocess.getRatio(finalROIkanan);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textRatio_sclera_kiri.setText("White Rasio : "+df.format(ratio[1]));
+                        textRatio_sclera_kanan.setText("Rasio Putih: "+df.format(ratio[1]));
                     }
                 });
 
-                final String result = preprocess.getResultScleraKiri(ratio);
+                final String result = preprocess.getResultScleraKanan(ratio);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        tv_result_sclera_kiri.setText("Coronary-Artery Diagnosa : "+ result);
+                        tv_result_sclera_kanan.setText("Hasil : "+ result);
                     }
                 });
 
@@ -264,7 +269,7 @@ public class Proses3Activity extends AppCompatActivity {
 
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(Proses3Activity.this,MulaiProses3Activity.class);
+        Intent back = new Intent(Proses4Activity.this,MulaiProses4Activity.class);
         startActivity(back);
     }
 
@@ -286,7 +291,6 @@ public class Proses3Activity extends AppCompatActivity {
                 else{
                     gambaraslicrop = sclera.copy(sclera.getConfig(), true);
                 }
-
             }
             return null;
         }

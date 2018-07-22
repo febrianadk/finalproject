@@ -12,14 +12,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class Proses2Activity extends AppCompatActivity {
 
     public Button button_Back_proses2, button_Next_proses3;
-    private Bitmap newBitmap=null, tempBitmap, tempBitmap2;
+    DecimalFormat df;
+    private Bitmap newBitmap=null;
     private ImageView gambar_crop_lingkaran, gambar_grayscale, gambar_sobel,
             gambar_segmentasi, gambar_ROI;
     private Preprocess preprocess;
-    private TextView tes, textView_Result2;
+    private TextView textView_Result2, textRatio_zona_jantung;
     private RelativeLayout relativeLayout;
 
     @Override
@@ -29,12 +32,15 @@ public class Proses2Activity extends AppCompatActivity {
 
         newBitmap = BitmapData.bitmap;
 
+        df = new DecimalFormat("##.###");
+
         gambar_crop_lingkaran = (ImageView) findViewById(R.id.gambar_crop_lingkaran);
         gambar_grayscale = (ImageView) findViewById(R.id.gambar_grayscale);
         gambar_sobel = (ImageView) findViewById(R.id.gambar_sobel);
         gambar_segmentasi = (ImageView) findViewById(R.id.gambar_segmentasi);
         gambar_ROI= (ImageView) findViewById(R.id.gambar_ROI);
         textView_Result2 = (TextView) findViewById(R.id.textView_Result2);
+       // textRatio_zona_jantung = (TextView) findViewById(R.id.textRatio_zona_jantung);
 
         button_Next_proses3=(Button)findViewById(R.id.button_Next_proses3);
         button_Back_proses2=(Button)findViewById(R.id.button_Back_proses2);
@@ -56,7 +62,6 @@ public class Proses2Activity extends AppCompatActivity {
         });
 
         process();
-
         BitmapData.processed = true;
     }
 
@@ -65,6 +70,7 @@ public class Proses2Activity extends AppCompatActivity {
 
         // Grayscale
         int blackRasioGrayscale = 0, whiteRasioGrayscale = 0;
+
         for (int i = 0; i < bitmap.getWidth(); i++) {
             for (int j = 0; j < bitmap.getHeight(); j++) {
                 int color = bitmap.getPixel(i, j);
@@ -109,9 +115,9 @@ public class Proses2Activity extends AppCompatActivity {
         //grayscale
         double whiteThresholdGrayscale = 0.26, blackThresholdGrayscale = 0.74;
         if (whiteRasioAverageGrayscale < whiteThresholdGrayscale && blackRasioAverageGrayscale > blackThresholdGrayscale) {
-            return "\n NORMAL";
+            return "NORMAL";
         } else {
-            return "\n ABNORMAL";
+            return "ABNORMAL";
         }
     }
 
@@ -165,12 +171,21 @@ public class Proses2Activity extends AppCompatActivity {
                     }
                 });
 
+                /*final String ratio = getFeatureExtraction(finalROIBitmap);
+                BitmapData.ratio = ratio;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        textRatio_zona_jantung.setText("Heart Spot Diagnosa : "+ ratio);
+                    }
+                });*/
+
                 final String result = getFeatureExtraction(finalROIBitmap);// extraxt the feature of roi area
                 BitmapData.result = result;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView_Result2.setText(result);
+                        textView_Result2.setText("Heart Spot Diagnosa : "+ result);
                     }
                 });
                 return null;
@@ -184,7 +199,9 @@ public class Proses2Activity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-
+        super.onBackPressed();
+        Intent back = new Intent(Proses2Activity.this,ProsesActivity.class);
+        startActivity(back);
     }
 
 }

@@ -16,10 +16,10 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -35,7 +35,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
-public class MulaiProses3Activity extends AppCompatActivity {
+public class MulaiProses4Activity extends AppCompatActivity {
 
     private static final int PICK_FROM_CAMERA= 1;
     private static final int PICK_FROM_GALLERY = 2;
@@ -214,7 +214,9 @@ public class MulaiProses3Activity extends AppCompatActivity {
                 }
                 cropBitmap=resize(cropBitmap, 350,350);
                 gambarutuh = cropBitmap.copy(cropBitmap.getConfig(), true);
+
                 apublik = cropBitmap.copy(cropBitmap.getConfig(), true);
+
                 flagGalatauCam = 1;
                 resultImage.setImageBitmap(gambarutuh);
                 alertText.setVisibility(View.INVISIBLE);
@@ -255,13 +257,14 @@ public class MulaiProses3Activity extends AppCompatActivity {
 
                         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
                         gambarutuh.compress(Bitmap.CompressFormat.PNG, 100, stream2);
-
+                        //apublik.recycle();
                         byte[] byteArray2 = stream2.toByteArray();
 
-                        Intent i = new Intent(MulaiProses3Activity.this, Proses3Activity.class);
+                        Intent i = new Intent(MulaiProses4Activity.this, Proses4Activity.class);
 
                         i.putExtra("gambarutuh", byteArray2);
                         i.putExtra("flagGalatauCam", flagGalatauCam);
+                        //i.putExtra("flag", 1);
 
                         stream2.close();
                         startActivity(i);
@@ -302,14 +305,14 @@ public class MulaiProses3Activity extends AppCompatActivity {
 
     public void callCamera(){
 
-        Intent captureIntent = new Intent(MulaiProses3Activity.this, CameraProses3Activity.class);
+        Intent captureIntent = new Intent(MulaiProses4Activity.this, CameraProses3Activity.class);
         startActivity(captureIntent);
     }
 
     public void callGallery(){
         try {
 
-            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(i, PICK_FROM_GALLERY);
 
         } catch (ActivityNotFoundException e) {
@@ -441,7 +444,7 @@ public class MulaiProses3Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(MulaiProses3Activity.this,Proses2Activity.class);
+        Intent back = new Intent(MulaiProses4Activity.this,Proses2Activity.class);
         startActivity(back);
     }
 

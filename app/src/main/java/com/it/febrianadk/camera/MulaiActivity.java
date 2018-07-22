@@ -239,12 +239,13 @@ public class MulaiActivity extends AppCompatActivity {
             else{
                 byte[] byteArray2 = getIntent().getByteArrayExtra("gambarutuh");
                 gambarutuh = BitmapFactory.decodeByteArray(byteArray2, 0, byteArray2.length);
-                apublik=  gambarutuh.copy(gambarutuh.getConfig(), true);
+                apublik = gambarutuh.copy(gambarutuh.getConfig(), true);
 
                 alertText.setVisibility(View.INVISIBLE);
                 resultImage.setImageBitmap(gambarutuh);
             }
         }
+
         check.setOnClickListener(new OnClickListener() {
 
             @Override

@@ -15,246 +15,198 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.it.febrianadk.iris.ProcessActivity"
-        tools:showIn="@layout/activity_proses">
+        tools:context="com.it.febrianadk.iris.Proses4Activity"
+        tools:showIn="@layout/activity_proses4">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_gambarasli"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="Gambar Asli"
+            android:text="Cropping Sclera Image"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/gambarasli"
+            android:id="@+id/iv_gambarasli"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView5"
+            android:layout_below="@+id/tv_gambarasli"
             />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/tv_medianfilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/gambarasli"
-            android:text="Deteksi Warna Sklera dan Putih Iris"
+            android:layout_below="@+id/iv_gambarasli"
+            android:text="Median Filter Process"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/ivDeteksiWarnaSklera"
+            android:id="@+id/iv_medianfilter"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView17" />
+            android:layout_below="@+id/tv_medianfilter"/>
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_sharpness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivDeteksiWarnaSklera"
-            android:text="Biner Putih bukan putih"
+            android:layout_below="@+id/iv_medianfilter"
+            android:text="Sharpening Process"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20dp"/>
 
         <ImageView
-            android:id="@+id/ivPutih"
+            android:id="@+id/iv_sharpness"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView6" />
+            android:layout_below="@+id/tv_sharpness" />
 
-        <TextView
-            android:id="@+id/textView18"
+        <!--<TextView
+            android:id="@+id/tv_deteksi_pthsclera_iris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivPutih"
-            android:text="Hasil Crop Biner"
+            android:layout_below="@+id/iv_sharpness"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Deteksi Iris dan Putih Sclera"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20dp"/>
 
         <ImageView
-            android:id="@+id/ivCropBiner"
+            android:id="@+id/iv_deteksi_pthsclera_iris"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView18" />
+            android:layout_below="@+id/tv_deteksi_pthsclera_iris"
+            android:gravity="center_vertical|center_horizontal" />-->
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/tv_grayscale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivCropBiner"
-            android:text="Hasil Crop"
+            android:layout_below="@+id/iv_sharpness"
+            android:text="Grayscale Image"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20dp"/>
 
         <ImageView
-            android:id="@+id/ivCrop"
+            android:id="@+id/iv_grayscale"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView7" />
+            android:layout_below="@+id/tv_grayscale"/>
+
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tv_deteksitepi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivCrop"
-            android:text="Ditambah Lingkaran"
-            android:textColor="#B3EEF9"
+            android:layout_below="@+id/iv_grayscale"
+            android:text="Sobel Edge Detection"
+            android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/ivCropPlusLingkaran"
+            android:id="@+id/iv_deteksitepi"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView8" />
+            android:layout_below="@+id/tv_deteksitepi"  />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/tv_binerisasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivCrop"
-            android:text="Lingkaran Luar"
+            android:layout_below="@+id/iv_deteksitepi"
+            android:text="Binarization Image"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/ivLingkarHitamLuar"
+            android:id="@+id/iv_binerisasi"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView9" />
+            android:layout_below="@+id/tv_binerisasi" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/tv_segmentasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivLingkarHitamLuar"
-            android:text="Normalisasi"
+            android:layout_below="@+id/iv_binerisasi"
+            android:text="Segmentation Image"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/ivNormalisasi"
-            android:layout_width="200dp"
+            android:id="@+id/iv_segmentasi"
+            android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView10" />
+            android:layout_below="@+id/tv_segmentasi"/>
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/tv_roi_kanan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivNormalisasi"
-            android:text="33%"
+            android:layout_below="@+id/iv_segmentasi"
+            android:text="ROI Cardiac Veins"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/ivNormalisasiCrop"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_alignParentLeft="true"
+            android:id="@+id/iv_roi_kanan"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView11" />
+            android:layout_below="@+id/tv_roi_kanan"/>
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/textRatio_sclera_kanan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivNormalisasiCrop"
-            android:text="Color detection"
-            android:textColor="#000000"
-            android:textSize="20dp" />
-
-        <ImageView
-            android:id="@+id/ivColorDetection"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView12" />
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivColorDetection"
+            android:layout_below="@+id/iv_roi_kanan"
+            android:text="White Rasio : 0.0"
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/tvJumlahPutih"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivColorDetection"
-            android:layout_toEndOf="@+id/textView13"
-            android:text=""
-            android:textColor="#000000"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/tvJumlahPutihTotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView13"
-            android:layout_toEndOf="@+id/textView13"
-            android:text=" "
-            android:textColor="#B3EEF9"
-            android:textSize="20dp" />
-
-        <TextView
-
-            android:id="@+id/tvKolesterol"
+            android:id="@+id/tv_result_sclera_kanan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/tvJumlahPutihTotal"
-            android:text="Diagnosa Kolesterol :"
-            android:textColor="#000000"
-            android:textSize="20dp"  />
-
-        <TextView
-
-            android:id="@+id/tv_Result_Kolesterol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvJumlahPutihTotal"
-            android:layout_toEndOf="@+id/tvKolesterol"
+            android:layout_below="@+id/textRatio_sclera_kanan"
+            android:layout_toEndOf="@+id/textRatio_sclera_kanan"
             android:text=" "
             android:textColor="#000000"
             android:textSize="20dp" />
 
         <LinearLayout
-            android:id="@+id/button_proses1"
+            android:id="@+id/button_proses3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/tv_Result_Kolesterol"
+            android:layout_below="@id/tv_result_sclera_kanan"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonBackprocess"
+                android:id="@+id/button_Back_Mulai4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -265,7 +217,7 @@
                 android:textColor="#fff" />
 
             <Button
-                android:id="@+id/buttonNextprocess"
+                android:id="@+id/button_Next_finalresult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -275,6 +227,5 @@
                 android:textColor="#fff" />
 
         </LinearLayout>
-
     </RelativeLayout>
 </ScrollView>

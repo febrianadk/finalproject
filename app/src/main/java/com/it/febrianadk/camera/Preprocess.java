@@ -140,7 +140,6 @@ public class Preprocess {
                     gray.setPixel(x, y, warnabaru);
                 } /*else {
 
-
                 } else if {
 
                 }*/
@@ -385,7 +384,6 @@ public class Preprocess {
                 //break;
             }
         }
-
         //top
         for (int i = topIndexMinimum; i <= topIndexMaximum; i++) {
             if (vertical_difference[i] > topThreshold) {
@@ -394,7 +392,6 @@ public class Preprocess {
                 //break;
             }
         }
-
         //bottom
         for (int i = bottomIndexMinimum; i >= bottomIndexMaximum; i--) {
             if (vertical_difference[i] > bottomThreshold) {
@@ -753,7 +750,7 @@ public class Preprocess {
         return segmentationBitmap;
     }
 
-    /* -- ROI -- */
+    /* -- ROI Zona Jantung-- */
     public Bitmap getROI(Bitmap bitmap) {
         // heart area
         int leftIndex = (int) (bitmap.getWidth() * 22.5 / 32);
@@ -778,5 +775,215 @@ public class Preprocess {
         }
 
         return roiBitmap;
+    }
+
+    /* -- Segementation Sclera Kiri-- */
+
+    public Bitmap getSegmentationKiri(Bitmap bitmap) {
+        Bitmap segmentationKiriBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.RGB_565);
+        Canvas cSegmentation = new Canvas(segmentationKiriBitmap);
+        cSegmentation.drawBitmap(segmentationKiriBitmap, 0, 0, new Paint());
+
+        // sclera kiri //
+        int leftIndex = (int) (bitmap.getWidth() * 14 / 32);
+        int rightIndex = bitmap.getWidth() * 30 / 32;
+        int topIndex = (int) (bitmap.getHeight() * 12 / 32);
+        int bottomIndex = bitmap.getHeight() * 20 / 32;
+
+        for (int i = 0; i < bitmap.getWidth(); i++) {
+            for (int j = 0; j < bitmap.getHeight(); j++) {
+                int color = bitmap.getPixel(i, j);
+
+                if ((i == leftIndex || i == rightIndex) && j >= topIndex && j <= bottomIndex) {
+                    segmentationKiriBitmap.setPixel(i, j, Color.RED);
+                } else if (i >= leftIndex && i <= rightIndex && (j == topIndex || j == bottomIndex)) {
+                    segmentationKiriBitmap.setPixel(i, j, Color.RED);
+                } else {
+                    segmentationKiriBitmap.setPixel(i, j,Color.rgb(Color.red(color), Color.green(color), Color.blue(color)));
+                }
+            }
+        }
+        return segmentationKiriBitmap;
+    }
+
+        //////ROI Sclera Kiri/////////////
+
+    public Bitmap getROIkiri(Bitmap bitmap) {
+        //(coronary artery)//
+        int leftIndex = (int) (bitmap.getWidth() * 14 / 32);
+        int rightIndex = bitmap.getWidth() * 30 / 32;
+        int topIndex = (int) (bitmap.getHeight() * 12 / 32);
+        int bottomIndex = bitmap.getHeight() * 20 / 32;
+
+        Bitmap roiBitmap = Bitmap.createBitmap(rightIndex - leftIndex, bottomIndex - topIndex, Bitmap.Config.RGB_565);
+        Canvas cROIkiri = new Canvas(roiBitmap);
+        cROIkiri.drawBitmap(roiBitmap, 0, 0, new Paint());
+
+        int xb = 0, yb = 0;
+
+        for (int x = leftIndex + 1; x <= rightIndex; x++) {
+            for (int y = topIndex + 1; y <= bottomIndex; y++) {
+                int color = bitmap.getPixel(x, y);
+                roiBitmap.setPixel(xb, yb, Color.rgb(Color.red(color), Color.green(color), Color.blue(color)));
+                yb++;
+            }
+            xb++;
+            yb = 0;
+        }
+        return roiBitmap;
+    }
+
+    /* -- Segementation Sclera Kanan-- */
+
+    public Bitmap getSegmentationKanan(Bitmap bitmap) {
+        Bitmap segmentationKananBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.RGB_565);
+        Canvas cSegmentation = new Canvas(segmentationKananBitmap);
+        cSegmentation.drawBitmap(segmentationKananBitmap, 0, 0, new Paint());
+
+        // sclera kanan //
+        int leftIndex = (int) (bitmap.getWidth() * 2 / 32);
+        int rightIndex = bitmap.getWidth() * 14 / 32;
+        int topIndex = (int) (bitmap.getHeight() * 12 / 32);
+        int bottomIndex = bitmap.getHeight() * 20 / 32;
+
+        for (int i = 0; i < bitmap.getWidth(); i++) {
+            for (int j = 0; j < bitmap.getHeight(); j++) {
+                int color = bitmap.getPixel(i, j);
+
+                if ((i == leftIndex || i == rightIndex) && j >= topIndex && j <= bottomIndex) {
+                    segmentationKananBitmap.setPixel(i, j, Color.RED);
+                } else if (i >= leftIndex && i <= rightIndex && (j == topIndex || j == bottomIndex)) {
+                    segmentationKananBitmap.setPixel(i, j, Color.RED);
+                } else {
+                    segmentationKananBitmap.setPixel(i, j,Color.rgb(Color.red(color), Color.green(color), Color.blue(color)));
+                }
+            }
+        }
+        return segmentationKananBitmap;
+    }
+
+        //////ROI Sclera Kanan/////////////
+
+    public Bitmap getROIkanan(Bitmap bitmap) {
+        //(cardiac vein)//
+        int leftIndex = (int) (bitmap.getWidth() * 2 / 32);
+        int rightIndex = bitmap.getWidth() * 14 / 32;
+        int topIndex = (int) (bitmap.getHeight() * 12 / 32);
+        int bottomIndex = bitmap.getHeight() * 20 / 32;
+
+        Bitmap roiBitmap = Bitmap.createBitmap(rightIndex - leftIndex, bottomIndex - topIndex, Bitmap.Config.RGB_565);
+        Canvas cROIkanan = new Canvas(roiBitmap);
+        cROIkanan.drawBitmap(roiBitmap, 0, 0, new Paint());
+
+        int xb = 0, yb = 0;
+
+        for (int x = leftIndex + 1; x <= rightIndex; x++) {
+            for (int y = topIndex + 1; y <= bottomIndex; y++) {
+                int color = bitmap.getPixel(x, y);
+                roiBitmap.setPixel(xb, yb, Color.rgb(Color.red(color), Color.green(color), Color.blue(color)));
+                yb++;
+            }
+            xb++;
+            yb = 0;
+        }
+        return roiBitmap;
+    }
+
+    public Bitmap getEkstraksiFitur(Bitmap bitmap) {
+        Bitmap ekstraksiFiturBmp = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.RGB_565);
+        Canvas cEkstraksiFitur = new Canvas(ekstraksiFiturBmp);
+        cEkstraksiFitur.drawBitmap(ekstraksiFiturBmp, 0, 0, new Paint());
+
+        int black = 0, white = 255;
+
+        int new_xr = 0;
+        for (int x = 0; x < bitmap.getWidth(); x++)
+        {
+            for (int y = 0; y < bitmap.getHeight(); y++)
+            {
+                int w = bitmap.getPixel(x, y);
+                int r = Color.red(w);
+                int g = Color.green(w);
+                int b = Color.blue(w);
+
+                double xr = Math.sqrt((Math.pow(r - white, 2)) + (Math.pow(g - white, 2)) + (Math.pow(b - white, 2)));
+
+                if (xr < 350)
+                {
+                    new_xr = 255;
+                }
+                else
+                {
+                    new_xr = 0;
+                }
+                int new_w = Color.rgb(new_xr, new_xr, new_xr);
+                ekstraksiFiturBmp.setPixel(x, y, new_w);
+            }
+        }
+        return ekstraksiFiturBmp;
+    }
+
+    ////Ratio Sclera//////////////////
+
+    public Double[] getRatio(Bitmap bitmap){
+        int black = 0, white = 255;
+        double black_count = 0, white_count = 0;
+        double count = 0; int lain = 0;
+
+        int new_xr = 0;
+        for (int x = 0; x < bitmap.getWidth(); x++)
+        {
+            for (int y = 0; y < bitmap.getHeight(); y++)
+            {
+                int w = bitmap.getPixel(x, y);
+
+                if (Color.red(w) == white)
+                {
+                    white_count++;
+                }
+                else
+                {
+                    black_count++;
+                }
+                count++;
+            }
+        }
+
+        double r_black = 0.0, r_white =0.0;
+        r_black = black_count / count;
+        r_white = white_count / count;
+
+        Double[] ratio = {r_black, r_white};
+        return ratio;
+    }
+
+    ///// Sclera Kiri/////////
+    public String getResultScleraKiri (Double[] ratio){
+        String result="";
+
+        if (ratio[1] >= 0.048){
+            result = "ABNORMAL";
+            BitmapData.result="ABNORMAL";
+        }
+        else{
+            result = "NORMAL";
+            BitmapData.result="NORMAL";
+        }
+        return result;
+    }
+
+    /////////Sclera Kanan///////////////
+    public String getResultScleraKanan (Double[] ratio){
+        String result="";
+
+        if (ratio[1] >= 0.063) {
+            result = "ABNORMAL";
+            BitmapData.result="ABNORMAL";
+        }
+        else{
+            result = "NORMAL";
+            BitmapData.result="NORMAL";
+        }
+        return result;
     }
 }

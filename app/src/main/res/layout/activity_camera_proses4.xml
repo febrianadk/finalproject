@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.it.febrianadk.camera.CameraActivity">
-
-    <include layout="@layout/content_camera" />
+    tools:context="com.it.febrianadk.camera.CameraProses4Activity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,9 +19,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="5dp"
-            android:paddingStart="20dp"
+            android:paddingStart="10dp"
             android:text="Focus on the target"/>
 
     </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_camera_proses4" />
 
 </android.support.design.widget.CoordinatorLayout>

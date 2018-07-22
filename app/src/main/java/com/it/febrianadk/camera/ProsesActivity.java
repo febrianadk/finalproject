@@ -29,7 +29,7 @@ public class ProsesActivity extends AppCompatActivity {
     ImageView ivDeteksiWarnaSklera,ivCropBiner,ivPutih,gambarasli,ivCrop,
             ivLingkarHitamLuar,ivNormalisasi,ivNormalisasiCrop,
             ivColorDetection;
-    TextView tvJumlahPutih,tvKolesterol,tvJumlahPutihTotal,resultText;
+    TextView tvJumlahPutih,tvKolesterol,tvJumlahPutihTotal,tv_Result_Kolesterol;
 
     int Rbesar = 0;
     int hxputih [];
@@ -45,19 +45,29 @@ public class ProsesActivity extends AppCompatActivity {
     Bitmap untukIVNORMALISASI=null;
     Bitmap untukIVNORMALISASICROP=null;
     int jum;
-    String untukTVJUMLAHPUTIH="",untuktvJumlahPutihTotal="",untuktvKolesterol="";
+    String untukTVJUMLAHPUTIH="",untuktvJumlahPutihTotal="",untuktv_Result_Kolesterol="";
     Bitmap untukIVCOLORDETECTION=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proses);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ivPutih=(ImageView)findViewById(R.id.ivPutih);
         ivCropBiner=(ImageView)findViewById(R.id.ivCropBiner);
         ivDeteksiWarnaSklera=(ImageView)findViewById(R.id.ivDeteksiWarnaSklera);
         gambarasli=(ImageView)findViewById(R.id.gambarasli);
         ivCrop=(ImageView)findViewById(R.id.ivCrop);
+
+        tv_Result_Kolesterol =(TextView)findViewById(R.id.tv_Result_Kolesterol);
+        tvJumlahPutih =(TextView)findViewById(R.id.tvJumlahPutih);
+        tvJumlahPutihTotal =(TextView)findViewById(R.id.tvJumlahPutihTotal);
+        ivLingkarHitamLuar=(ImageView)findViewById(R.id.ivLingkarHitamLuar);
+        ivNormalisasi=(ImageView)findViewById(R.id.ivNormalisasi);
+        ivNormalisasiCrop=(ImageView)findViewById(R.id.ivNormalisasiCrop);
+        ivColorDetection=(ImageView)findViewById(R.id.ivColorDetection);
+
         buttonBackprocess=(Button)findViewById(R.id.buttonBackprocess);
         buttonNextprocess=(Button)findViewById(R.id.buttonNextprocess);
 
@@ -66,13 +76,14 @@ public class ProsesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent string = new Intent(ProsesActivity.this, MulaiActivity.class);
-                if (jum > 160) {
-                    string.putExtra("abc", "Abnormal");
+                startActivity(string);
+               /* if (jum > 160) {
+                    string.putExtra("abc", "ABNORMAL");
                 }
                 else{
-                    string.putExtra("abc", "Normal");
+                    string.putExtra("abc", "NORMAL");
 
-                }
+                }*/
                 try{
                     if(flagGalatauCam==0){
                         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
@@ -116,14 +127,6 @@ public class ProsesActivity extends AppCompatActivity {
             }
         });
 
-        tvKolesterol =(TextView)findViewById(R.id.tvKolesterol);
-        tvJumlahPutih =(TextView)findViewById(R.id.tvJumlahPutih);
-        tvJumlahPutihTotal =(TextView)findViewById(R.id.tvJumlahPutihTotal);
-        ivLingkarHitamLuar=(ImageView)findViewById(R.id.ivLingkarHitamLuar);
-        ivNormalisasi=(ImageView)findViewById(R.id.ivNormalisasi);
-        ivNormalisasiCrop=(ImageView)findViewById(R.id.ivNormalisasiCrop);
-        ivColorDetection=(ImageView)findViewById(R.id.ivColorDetection);
-        resultText=(TextView)findViewById(R.id.resultText);
 
         if(getIntent().hasExtra("flagGalatauCam")){
             flagGalatauCam=getIntent().getIntExtra("flagGalatauCam",0);
@@ -308,8 +311,6 @@ public class ProsesActivity extends AppCompatActivity {
             perubahan=horizontal[i]-horizontal[i+1];
             if (perubahan >= Thresholdperubahan)
             {
-
-
                 Thresholdperubahan =perubahan;
                 leftPoint = i;
             }
@@ -517,7 +518,6 @@ public class ProsesActivity extends AppCompatActivity {
             }
         }
         Bitmap areaIrisplusLingk = Iris.copy(Iris.getConfig(), true);
-
     }
 
     public void Lingkaranluar (Bitmap gambarAreaIrisCrop) {
@@ -629,14 +629,14 @@ public class ProsesActivity extends AppCompatActivity {
                 jum++;
             jumputih++;
         }
-        untukTVJUMLAHPUTIH="Jumlah putih >=2 = "+jum;
-        untuktvJumlahPutihTotal="\nJumlah total putih = "+jumputih;
+        untukTVJUMLAHPUTIH="Jumlah putih >=2 : "+jum;
+      //  untuktvJumlahPutihTotal="\nJumlah total putih = "+jumputih;
 
         if (jum > 160) {//139 70
-            untuktvKolesterol="Abnormal";
+            untuktv_Result_Kolesterol=" ABNORMAL";
         }
         else {
-            untuktvKolesterol="Normal";
+            untuktv_Result_Kolesterol=" NORMAL";
         }
 
         Bitmap areaPutih = putih.copy(putih.getConfig(), true);
@@ -701,7 +701,7 @@ public class ProsesActivity extends AppCompatActivity {
                     ivColorDetection.setImageBitmap(untukIVCOLORDETECTION);
                     tvJumlahPutih.setText(untukTVJUMLAHPUTIH);
                     tvJumlahPutihTotal.setText(untuktvJumlahPutihTotal);
-                    tvKolesterol.setText(untuktvKolesterol);
+                    tv_Result_Kolesterol.setText(untuktv_Result_Kolesterol);
                     ivCropBiner.setImageBitmap(untukIVCROPBINER);
                     ivDeteksiWarnaSklera.setImageBitmap(untukIVDETEKSIWARNASKLERA);
             }

@@ -68,10 +68,31 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MulaiProses3Activity"
+            android:label="MulaiProses3Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Proses3Activity"
             android:label="Proses3Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Proses3Activity" />
-        <activity android:name=".CameraProses3Activity" />
+        <activity
+            android:name=".CameraProses3Activity"
+            android:label="CameraProses3Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MulaiProses4Activity"
+            android:label="MulaiProses4Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Proses4Activity"
+            android:label="Proses4Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CameraProses4Activity"
+            android:label="CameraProses4Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ResultActivity"
+            android:label="ResultActivity" ></activity>
     </application>
 
 </manifest>

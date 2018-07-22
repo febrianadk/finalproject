@@ -28,13 +28,13 @@ import java.util.Calendar;
 
 public class CameraProses3Activity extends Activity {
 
-    ImageView captureButton,flashButton,target;
+    ImageView captureButton,target,flashButton;
     FrameLayout frame;
     Camera camera;
     Activity context;
     PreviewCamera previewCamera;
     Camera.Parameters params;
-    String path = "/sdcard/Coronary Heart Detection/";
+    String path = "/sdcard/Coronary Heart Detection/Coronary Artery/";
     Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
 
         @Override
@@ -111,13 +111,9 @@ public class CameraProses3Activity extends Activity {
 
             }
 
-            //realImage = Bitmap.createScaledBitmap(realImage, 2400, 3200, true);
-            //realImage = autoCrop(realImage);
             BitmapData.processed = false;
             BitmapData.result = "Go Check Your Sclera..";
 
-            // Bitmap resized = Bitmap.createScaledBitmap(realImage, 450,600, true);
-            //Bitmap resized = Bitmap.createScaledBitmap(realImage, 2400, 3200, true);
             BitmapData.bitmap = realImage;
             releaseCameraAndPreview();
             finish();
@@ -138,7 +134,7 @@ public class CameraProses3Activity extends Activity {
 
         }
     };
-    private boolean isFlashOn = false;
+   /* private boolean isFlashOn = false;*/
 
     public static Bitmap rotate(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
@@ -149,14 +145,15 @@ public class CameraProses3Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.activity_camera_proses3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         context = this;
 
         captureButton = (ImageView) findViewById(R.id.captureButton);
 
-        flashButton = (ImageView) findViewById(R.id.flashButton);
-        target=(ImageView) findViewById(R.id.camera_target2);
+        /*flashButton = (ImageView) findViewById(R.id.flashButton);*/
+        target=(ImageView) findViewById(R.id.camera_target3);
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int lebarlayar = displayMetrics.widthPixels;
@@ -168,7 +165,6 @@ public class CameraProses3Activity extends Activity {
 
         frame = (FrameLayout) findViewById(R.id.frameLayout);
        // Toast.makeText(this, "cekk", Toast.LENGTH_SHORT).show();
-      //  frame.removeAllViews(); //clear image
 
         frame.addView(previewCamera);
         previewCamera.setKeepScreenOn(true);
@@ -187,7 +183,7 @@ public class CameraProses3Activity extends Activity {
             }
         });
 
-        flashButton.setOnClickListener(new View.OnClickListener() {
+       /* flashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isFlashOn) {
@@ -204,7 +200,7 @@ public class CameraProses3Activity extends Activity {
                     isFlashOn = true;
                 }
             }
-        });
+        });*/
     }
 
     public void takeFocusedPicture() {

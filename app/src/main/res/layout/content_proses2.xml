@@ -9,7 +9,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#B3EEF9"
+        android:background="#FFFFFF"
         android:gravity="center"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -112,24 +112,24 @@
             android:layout_below="@+id/textView_ROI"
             android:gravity="center_vertical|center_horizontal" />
 
-        <!--<TextView
+        <TextView
             android:id="@+id/textRatio_zona_jantung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/gambar_ROI"
-            android:text="White Rasio : "
+            android:text=" "
             android:textColor="#000000"
-            android:textSize="20dp"  />-->
+            android:textSize="20dp"  />
 
         <TextView
             android:id="@+id/textView_Result2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/gambar_ROI"
-            android:layout_toEndOf="@+id/gambar_ROI"
-            android:text=" "
+            android:layout_below="@+id/textRatio_zona_jantung"
+            android:layout_toEndOf="@+id/textRatio_zona_jantung"
+            android:text="Rasio Hitam : 0.0 ; Rasio Putih : 0.0"
             android:textColor="#000000"
             android:textSize="20dp"/>
 

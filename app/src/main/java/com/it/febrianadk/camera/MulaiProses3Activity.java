@@ -50,6 +50,8 @@ public class MulaiProses3Activity extends AppCompatActivity {
     Uri fileUri;
     Bitmap apublik;
 
+    String nerimaHasilKolesterol, nerimaHasilJantung;
+
     public static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
@@ -156,6 +158,9 @@ public class MulaiProses3Activity extends AppCompatActivity {
         alertText = (TextView) findViewById(R.id.alertText);
         resultText = (TextView) findViewById(R.id.resultText);
 
+        Intent hasilKolesterol = getIntent();
+        nerimaHasilKolesterol = hasilKolesterol.getStringExtra("variabelKolesterol");
+        nerimaHasilJantung = hasilKolesterol.getStringExtra("variabelJantung");
 
 
         final String[] option = new String[] { "Take from Camera", "Select from Gallery","Cancel" };
@@ -258,10 +263,16 @@ public class MulaiProses3Activity extends AppCompatActivity {
 
                         byte[] byteArray2 = stream2.toByteArray();
 
+                       // Log.d("ayam","isi hsl cardiac :"+nerimaHasilJantung);
+                       // Log.d("ayam","isi hsl cardiac :"+nerimaHasilKolesterol);
+
                         Intent i = new Intent(MulaiProses3Activity.this, Proses3Activity.class);
 
                         i.putExtra("gambarutuh", byteArray2);
                         i.putExtra("flagGalatauCam", flagGalatauCam);
+
+                        i.putExtra("variabelJantung", nerimaHasilJantung);
+                        i.putExtra("variabelKolesterol", nerimaHasilKolesterol);
 
                         stream2.close();
                         startActivity(i);

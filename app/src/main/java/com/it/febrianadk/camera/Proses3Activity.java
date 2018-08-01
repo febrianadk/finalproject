@@ -35,6 +35,8 @@ public class Proses3Activity extends AppCompatActivity {
     private RelativeLayout relativeLayout;
     private Preprocess preprocess;
 
+    String nerimaHasilKolesterol, nerimaHasilJantung;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +62,26 @@ public class Proses3Activity extends AppCompatActivity {
         button_Next_proses4=(Button)findViewById(R.id.button_Next_proses4);
         button_Back_Mulai3=(Button)findViewById(R.id.button_Back_Mulai3);
 
+        Intent hasilKolesterol = getIntent();
+        nerimaHasilKolesterol = hasilKolesterol.getStringExtra("variabelKolesterol");
+        nerimaHasilJantung = hasilKolesterol.getStringExtra("variabelJantung");
+
         /////Next button proses//////
         button_Next_proses4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent m = new Intent(Proses3Activity.this, MulaiProses4Activity.class);
-                startActivity(m);
+                /*Intent m = new Intent(Proses3Activity.this, MulaiProses4Activity.class);
+                startActivity(m);*/
+
+                //Log.d("ayam","isi hsl cardiac :"+nerimaHasilJantung);
+                //Log.d("ayam","isi hsl cardiac :"+nerimaHasilKolesterol);
+
+                Intent hasilJantung = new Intent(getApplicationContext(), MulaiProses4Activity.class);
+                hasilJantung.putExtra("variabelKolesterol", nerimaHasilKolesterol);
+                hasilJantung.putExtra("variabelJantung", nerimaHasilJantung);
+                hasilJantung.putExtra("variabelCoronary", tv_result_sclera_kiri.getText().toString());
+                startActivity(hasilJantung);
+
             }
         });
         /////////////////////////////
@@ -176,15 +192,6 @@ public class Proses3Activity extends AppCompatActivity {
                     }
                 });
 
-                //deteksi iris dan putih sclera
-               /* final Bitmap finalDeteksiIrisScleraBitmap = preprocess.getDeteksiIrisSclera(finalSharpenBitmap);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        iv_deteksi_pthsclera_iris.setImageBitmap(finalDeteksiIrisScleraBitmap);
-                    }
-                });*/
-
                 //Grayscale
                 final Bitmap finalGrayscaleBitmap = preprocess.getGrayScale(finalSharpenBitmap);
                 runOnUiThread(new Runnable() {
@@ -229,13 +236,6 @@ public class Proses3Activity extends AppCompatActivity {
                     }
                 });
 
-                /*final Bitmap ekstraksiFiturBmp = preprocess.getEkstraksiFitur(roiBmp);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgEkstraksiFitur.setImageBitmap(ekstraksiFiturBmp);
-                    }
-                });*/
 
                 final Double[] ratio = preprocess.getRatio(finalROIkiri);
                 runOnUiThread(new Runnable() {
@@ -249,7 +249,7 @@ public class Proses3Activity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        tv_result_sclera_kiri.setText("Coronary-Artery Diagnosa : "+ result);
+                        tv_result_sclera_kiri.setText("Coronary-Artery Diagnosis : "+ result);
                     }
                 });
 

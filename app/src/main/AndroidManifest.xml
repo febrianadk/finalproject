@@ -12,7 +12,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon_hdd"
+        android:icon="@mipmap/ic_launcher_hdd"
         android:label="Coronary Heart Detection"
         android:largeHeap="true"
         android:supportsRtl="true"

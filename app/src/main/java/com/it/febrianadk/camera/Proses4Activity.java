@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ import static com.it.febrianadk.camera.BitmapData.result;
 
 public class Proses4Activity extends AppCompatActivity {
 
-    public Button button_Next_proses4, button_Back_Mulai4;
+    public Button button_Next_finalresult, button_Back_Mulai4;
     Bitmap gray=null, sclera=null;
     int flagGalatauCam=0;
     Bitmap resized=null, gambarutuh=null, gambaraslicrop=null;
@@ -34,6 +35,8 @@ public class Proses4Activity extends AppCompatActivity {
     private TextView  tv_result_sclera_kanan, textRatio_sclera_kanan;
     private RelativeLayout relativeLayout;
     private Preprocess preprocess;
+
+    String nerimaHasilKolesterol, nerimaHasilJantung, nerimaCoronary, nerimaCardiac;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +59,13 @@ public class Proses4Activity extends AppCompatActivity {
         textRatio_sclera_kanan = (TextView) findViewById(R.id.textRatio_sclera_kanan);
         tv_result_sclera_kanan =(TextView)findViewById(R.id.tv_result_sclera_kanan);
 
-        button_Next_proses4=(Button)findViewById(R.id.button_Next_proses4);
+        button_Next_finalresult=(Button)findViewById(R.id.button_Next_finalresult);
         button_Back_Mulai4=(Button)findViewById(R.id.button_Back_Mulai4);
+
+        Intent hasilKolesterol = getIntent();
+        nerimaHasilKolesterol = hasilKolesterol.getStringExtra("variabelKolesterol");
+        nerimaHasilJantung = hasilKolesterol.getStringExtra("variabelJantung");
+        nerimaCoronary = hasilKolesterol.getStringExtra("variabelCoronary");
 
         button_Back_Mulai4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,19 +102,29 @@ public class Proses4Activity extends AppCompatActivity {
             }
         });
 
-
         /////Next button proses//////
-        /*button_Next_proses4.setOnClickListener(new View.OnClickListener() {
+        button_Next_finalresult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent m = new Intent(Proses4Activity.this,ResultActivity.class);
-                startActivity(m);
+                /*Intent m = new Intent(Proses4Activity.this,ResultActivity.class);
+                startActivity(m);*/
 
-                *//*Intent resultSclera = new Intent(getApplicationContext(), ResultActivity.class);
-                resultSclera.putExtra("var_ScleraKanan", result);
-                startActivity(resultSclera);*//*
+
+                Log.d("ayam","isi hsl cardiac :"+nerimaHasilJantung);
+                Log.d("ayam","isi hsl cardiac :"+nerimaHasilKolesterol);
+                Log.d("ayam","isi hsl cardiac :"+nerimaCoronary);
+                Log.d("ayam","isi hsl cardiac :"+nerimaCardiac);
+
+
+
+                Intent hasilJantung = new Intent(getApplicationContext(), ResultActivity.class);
+                hasilJantung.putExtra("variabelJantung", nerimaHasilJantung);
+                hasilJantung.putExtra("variabelKolesterol", nerimaHasilKolesterol);
+                hasilJantung.putExtra("variabelCoronary", nerimaCoronary);
+                hasilJantung.putExtra("variabelCardiac", nerimaCardiac);
+                startActivity(hasilJantung);
             }
-        });*/
+        });
         /////////////////////////////
 
 
@@ -254,7 +272,8 @@ public class Proses4Activity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        tv_result_sclera_kanan.setText("Hasil : "+ result);
+                        tv_result_sclera_kanan.setText("Cardiac-Vein Diagnosis : "+ result);
+                        nerimaCardiac = "Cardiac-Vein Diagnosis : "+ result;
                     }
                 });
 

@@ -77,13 +77,13 @@ public class ProsesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent string = new Intent(ProsesActivity.this, MulaiActivity.class);
                 startActivity(string);
-               /* if (jum > 160) {
-                    string.putExtra("abc", "ABNORMAL");
+                if (jum > 160) {
+                    string.putExtra("abc", "Cholesterol Ring Diagnosis : ABNORMAL");
                 }
                 else{
-                    string.putExtra("abc", "NORMAL");
+                    string.putExtra("abc", "Cholesterol Ring Diagnosis : NORMAL");
+                }
 
-                }*/
                 try{
                     if(flagGalatauCam==0){
                         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
@@ -119,8 +119,12 @@ public class ProsesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     if(areaIrisLingkaranLuar != null) {
-                        Intent string = new Intent(ProsesActivity.this, Proses2Activity.class);
-                        startActivity(string);
+                        /*Intent string = new Intent(ProsesActivity.this, Proses2Activity.class);
+                        startActivity(string);*/
+
+                        Intent hasilKolesterol = new Intent(getApplicationContext(), Proses2Activity.class);
+                        hasilKolesterol.putExtra("variabelKolesterol", tv_Result_Kolesterol.getText().toString());
+                        startActivity(hasilKolesterol);
                     } else{
                         Log.d("ProsesActivity", "Bitmap Kosong");
                     }
@@ -541,7 +545,7 @@ public class ProsesActivity extends AppCompatActivity {
     }
 
     public void Normalisasi (Bitmap gambarIrisLingkaranLuar) {
-        int nilaigambar[][]=new int[Rbesar*360][3];
+        int nilaigambar[][]= new int[Rbesar*360][3];
         Bitmap areaIrisLingkaranLuarHitam = gambarIrisLingkaranLuar.copy(gambarIrisLingkaranLuar.getConfig(), true);
         int a = gambarIrisLingkaranLuar.getWidth()/ 2, b = gambarIrisLingkaranLuar.getHeight() / 2;
         int k = 0;
@@ -572,7 +576,7 @@ public class ProsesActivity extends AppCompatActivity {
         Bitmap kotaksip = Bitmap.createBitmap(360, Rbesar, conf);
 
         k=0;
-        for (int i = 0; i < 360; i++)//int i = 0; i < 360; i++
+        for (int i = 0; i < 360; i++)
         {
             for (int j = Rbesar-1; j >= 0; j--)
             {
@@ -633,10 +637,10 @@ public class ProsesActivity extends AppCompatActivity {
       //  untuktvJumlahPutihTotal="\nJumlah total putih = "+jumputih;
 
         if (jum > 160) {//139 70
-            untuktv_Result_Kolesterol=" ABNORMAL";
+            untuktv_Result_Kolesterol="Cholesterol Ring Diagnosis : ABNORMAL";
         }
         else {
-            untuktv_Result_Kolesterol=" NORMAL";
+            untuktv_Result_Kolesterol="Cholesterol Ring Diagnosis : NORMAL";
         }
 
         Bitmap areaPutih = putih.copy(putih.getConfig(), true);

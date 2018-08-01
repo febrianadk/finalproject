@@ -116,7 +116,7 @@ public class CameraProses4Activity extends Activity {
             releaseCameraAndPreview();
             finish();
 
-            Intent intent = new Intent(CameraProses4Activity.this, MulaiProses3Activity.class);
+            Intent intent = new Intent(CameraProses4Activity.this, MulaiProses4Activity.class);
             startActivity(intent);
         }
     };
@@ -143,7 +143,7 @@ public class CameraProses4Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera_proses3);
+        setContentView(R.layout.activity_camera_proses4);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         context = this;
 

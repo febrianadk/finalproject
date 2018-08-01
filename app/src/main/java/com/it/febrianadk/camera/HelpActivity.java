@@ -25,8 +25,18 @@ public class HelpActivity extends AppCompatActivity {
                 startActivity(m);
             }
         });
+    }
 
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(HelpActivity.this,MainActivity.class);
+        startActivity(back);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 
 }

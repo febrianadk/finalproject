@@ -3,7 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B3EEF9"
+    android:background="#FFFFFF"
     android:fillViewport="true">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,123 +18,76 @@
         tools:context="com.it.febrianadk.camera.ResultActivity">
 
         <TextView
-            android:id="@+id/tv_zona_jantung"
+            android:id="@+id/textView_Result2"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:text="Diagnosa Zona Jantung : "
-            android:textColor="#000000"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textView_Result2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_zona_jantung"
-            android:layout_toEndOf="@+id/tv_zona_jantung"
             android:text=" "
             android:textColor="#000000"
             android:textSize="20dp"/>
 
-        <ImageView
-            android:id="@+id/gambar_ROI"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_Result2"/>
-
         <TextView
-
-            android:id="@+id/tvKolesterol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/gambar_ROI"
-            android:text="Zona Cholesterol Ring :"
-            android:textColor="#000000"
-            android:textSize="20dp"  />
-
-        <TextView
-
             android:id="@+id/tv_Result_Kolesterol"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvKolesterol"
-            android:layout_toEndOf="@+id/tvKolesterol"
+            android:layout_below="@+id/textView_Result2"
             android:text=" "
             android:textColor="#000000"
             android:textSize="20dp" />
 
-        <ImageView
-            android:id="@+id/ivColorDetection"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_Result_Kolesterol" />
-
-        <TextView
-            android:id="@+id/tv_roi_kiri"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivColorDetection"
-            android:text="Zona Coronary-Artery :"
-            android:textColor="#000000"
-            android:textSize="20dp"  />
 
         <TextView
             android:id="@+id/tv_result_sclera_kiri"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_roi_kiri"
-            android:layout_toEndOf="@+id/tv_roi_kiri"
+            android:layout_below="@+id/tv_Result_Kolesterol"
             android:text=" "
             android:textColor="#000000"
             android:textSize="20dp" />
-
-        <ImageView
-            android:id="@+id/iv_roi_kiri"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_result_sclera_kiri" />
-
-        <TextView
-            android:id="@+id/tv_roi_kanan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/iv_roi_kiri"
-            android:text="Zona Cardiac-Veins : "
-            android:textColor="#000000"
-            android:textSize="20dp"  />
 
         <TextView
             android:id="@+id/tv_result_sclera_kanan"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_roi_kanan"
-            android:layout_toEndOf="@+id/tv_roi_kanan"
+            android:layout_below="@+id/tv_result_sclera_kiri"
             android:text=" "
             android:textColor="#000000"
             android:textSize="20dp" />
 
-        <ImageView
-            android:id="@+id/iv_roi_kanan"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+        <TextView
+            android:id="@+id/text_ResultAkhir"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_result_sclera_kanan" />
-
+            android:layout_below="@+id/tv_result_sclera_kanan"
+            android:text="Result :"
+            android:textColor="#000000"
+            android:textSize="20dp"  />
         <TextView
             android:id="@+id/tv_result_akhir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/iv_roi_kanan"
+            android:layout_below="@+id/text_ResultAkhir"
             android:text="  "
             android:textColor="#000000"
             android:textSize="20dp"  />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_Finish"
+            android:text="Finish"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:background="#303F9F"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 </ScrollView>

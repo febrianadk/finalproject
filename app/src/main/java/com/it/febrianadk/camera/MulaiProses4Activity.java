@@ -50,6 +50,8 @@ public class MulaiProses4Activity extends AppCompatActivity {
     Uri fileUri;
     Bitmap apublik;
 
+    String nerimaHasilKolesterol, nerimaHasilJantung, nerimaCoronary;
+
     public static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
@@ -69,7 +71,6 @@ public class MulaiProses4Activity extends AppCompatActivity {
                 inSampleSize *= 2;
             }
         }
-
         return inSampleSize;
     }
 
@@ -146,7 +147,7 @@ public class MulaiProses4Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mulai_proses3);
+        setContentView(R.layout.activity_mulai_proses4);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -156,7 +157,10 @@ public class MulaiProses4Activity extends AppCompatActivity {
         alertText = (TextView) findViewById(R.id.alertText);
         resultText = (TextView) findViewById(R.id.resultText);
 
-
+        Intent hasilKolesterol = getIntent();
+        nerimaHasilKolesterol = hasilKolesterol.getStringExtra("variabelKolesterol");
+        nerimaHasilJantung = hasilKolesterol.getStringExtra("variabelJantung");
+        nerimaCoronary = hasilKolesterol.getStringExtra("variabelCoronary");
 
         final String[] option = new String[] { "Take from Camera", "Select from Gallery","Cancel" };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, option);
@@ -257,14 +261,20 @@ public class MulaiProses4Activity extends AppCompatActivity {
 
                         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
                         gambarutuh.compress(Bitmap.CompressFormat.PNG, 100, stream2);
-                        //apublik.recycle();
                         byte[] byteArray2 = stream2.toByteArray();
+
+                   /*     Log.d("ayam","isi hsl cardiac :"+nerimaHasilJantung);
+                        Log.d("ayam","isi hsl cardiac :"+nerimaHasilKolesterol);
+                        Log.d("ayam","isi hsl cardiac :"+nerimaCoronary);*/
 
                         Intent i = new Intent(MulaiProses4Activity.this, Proses4Activity.class);
 
                         i.putExtra("gambarutuh", byteArray2);
                         i.putExtra("flagGalatauCam", flagGalatauCam);
-                        //i.putExtra("flag", 1);
+
+                        i.putExtra("variabelJantung", nerimaHasilJantung);
+                        i.putExtra("variabelKolesterol", nerimaHasilKolesterol);
+                        i.putExtra("variabelCoronary", nerimaCoronary);
 
                         stream2.close();
                         startActivity(i);
@@ -305,7 +315,7 @@ public class MulaiProses4Activity extends AppCompatActivity {
 
     public void callCamera(){
 
-        Intent captureIntent = new Intent(MulaiProses4Activity.this, CameraProses3Activity.class);
+        Intent captureIntent = new Intent(MulaiProses4Activity.this, CameraProses4Activity.class);
         startActivity(captureIntent);
     }
 
@@ -444,7 +454,7 @@ public class MulaiProses4Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(MulaiProses4Activity.this,Proses2Activity.class);
+        Intent back = new Intent(MulaiProses4Activity.this,Proses3Activity.class);
         startActivity(back);
     }
 

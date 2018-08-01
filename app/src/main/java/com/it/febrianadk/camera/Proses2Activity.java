@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,6 +26,8 @@ public class Proses2Activity extends AppCompatActivity {
     private TextView textView_Result2, textRatio_zona_jantung;
     private RelativeLayout relativeLayout;
 
+    String nerimaHasilKolesterol;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,16 +43,27 @@ public class Proses2Activity extends AppCompatActivity {
         gambar_segmentasi = (ImageView) findViewById(R.id.gambar_segmentasi);
         gambar_ROI= (ImageView) findViewById(R.id.gambar_ROI);
         textView_Result2 = (TextView) findViewById(R.id.textView_Result2);
-       // textRatio_zona_jantung = (TextView) findViewById(R.id.textRatio_zona_jantung);
+        textRatio_zona_jantung = (TextView) findViewById(R.id.textRatio_zona_jantung);
 
         button_Next_proses3=(Button)findViewById(R.id.button_Next_proses3);
         button_Back_proses2=(Button)findViewById(R.id.button_Back_proses2);
 
+        Intent hasilKolesterol = getIntent();
+        nerimaHasilKolesterol = hasilKolesterol.getStringExtra("variabelKolesterol");
+
         button_Next_proses3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent m = new Intent(Proses2Activity.this, MulaiProses3Activity.class);
-                startActivity(m);
+                /*Intent m = new Intent(Proses2Activity.this, MulaiProses3Activity.class);
+                startActivity(m);*/
+
+                Log.d("ayam","isi hsl cardiac :"+nerimaHasilKolesterol);
+
+                Intent hasilJantung = new Intent(getApplicationContext(), MulaiProses3Activity.class);
+                hasilJantung.putExtra("variabelKolesterol", nerimaHasilKolesterol);
+                hasilJantung.putExtra("variabelJantung", textView_Result2.getText().toString());
+                startActivity(hasilJantung);
+
             }
         });
 
@@ -87,7 +101,12 @@ public class Proses2Activity extends AppCompatActivity {
         double whiteRasioAverageGrayscale = whiteRasioGrayscale / roiBitmapArea;
         double blackRasioAverageGrayscale = blackRasioGrayscale / roiBitmapArea;
 
-        // Distance
+        Log.d("grayscale","isi hsl rasio putih :" +whiteRasioAverageGrayscale);
+        Log.d("grayscale","isi hsl rasio hitam :" +blackRasioAverageGrayscale);
+
+      /*  textRatio_zona_jantung.setText("Rasio Hitam: "+ df.format(blackRasioAverageGrayscale) +"; Rasio Putih: "+df.format(whiteRasioAverageGrayscale));
+*/
+    /*    // Distance
         int blackRasioDistance = 0, whiteRasioDistance = 0;
         for (int i = 0; i < bitmap.getWidth(); i++) {
             for (int j = 0; j < bitmap.getHeight(); j++) {
@@ -109,13 +128,18 @@ public class Proses2Activity extends AppCompatActivity {
 
         double whiteRasioAverageDistance = whiteRasioDistance / roiBitmapArea;
         double blackRasioAverageDistance = blackRasioDistance / roiBitmapArea;
+*/
 
-        // thresholding classification
+        //////////// thresholding classification///////////
         // new threshold based on new ROI area
         //grayscale
-        double whiteThresholdGrayscale = 0.26, blackThresholdGrayscale = 0.74;
+
+        // double whiteThresholdGrayscale = 0.26, blackThresholdGrayscale = 0.74;
+
+
+        double whiteThresholdGrayscale = 0.275, blackThresholdGrayscale = 0.725;
         if (whiteRasioAverageGrayscale < whiteThresholdGrayscale && blackRasioAverageGrayscale > blackThresholdGrayscale) {
-            return "NORMAL";
+            return "NORMAL"; //rasio putih < 0,275  dan rasio hitam > 0,725
         } else {
             return "ABNORMAL";
         }
@@ -142,7 +166,15 @@ public class Proses2Activity extends AppCompatActivity {
                         gambar_crop_lingkaran.setImageBitmap(newBitmap);
                     }
                 });
-                final Bitmap finalGrayscaleBitmap = preprocess.getGrayScale(finalOriginalBitmap);// process the color crop bitmap with grayscale
+
+                final Bitmap finalSharpenBitmap = preprocess.getSharpen(finalOriginalBitmap);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                       // iv_sharpness.setImageBitmap(finalSharpenBitmap);
+                    }
+                });
+                final Bitmap finalGrayscaleBitmap = preprocess.getGrayScale(finalSharpenBitmap);// process the color crop bitmap with grayscale
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -156,6 +188,7 @@ public class Proses2Activity extends AppCompatActivity {
                         gambar_sobel.setImageBitmap(finalSobelBitmap);
                     }
                 });
+
                 final Bitmap finalSegmentedBitmap = preprocess.getSegmentation(finalSobelBitmap);// show the roi area from sobel image
                 runOnUiThread(new Runnable() {
                     @Override
@@ -163,7 +196,7 @@ public class Proses2Activity extends AppCompatActivity {
                         gambar_segmentasi.setImageBitmap(finalSegmentedBitmap);
                     }
                 });
-                final Bitmap finalROIBitmap = preprocess.getROI(finalSobelBitmap);// get the roi area from sobel image
+                final Bitmap finalROIBitmap = preprocess.getROIjantung(finalSobelBitmap);// get the roi area from sobel image
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -171,23 +204,18 @@ public class Proses2Activity extends AppCompatActivity {
                     }
                 });
 
-                /*final String ratio = getFeatureExtraction(finalROIBitmap);
-                BitmapData.ratio = ratio;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        textRatio_zona_jantung.setText("Heart Spot Diagnosa : "+ ratio);
-                    }
-                });*/
 
                 final String result = getFeatureExtraction(finalROIBitmap);// extraxt the feature of roi area
                 BitmapData.result = result;
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView_Result2.setText("Heart Spot Diagnosa : "+ result);
+
+                        textView_Result2.setText("Heart Spot Diagnosis : "+ result);
                     }
                 });
+
                 return null;
             }
 

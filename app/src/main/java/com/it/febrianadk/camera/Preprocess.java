@@ -751,7 +751,7 @@ public class Preprocess {
     }
 
     /* -- ROI Zona Jantung-- */
-    public Bitmap getROI(Bitmap bitmap) {
+    public Bitmap getROIjantung(Bitmap bitmap) {
         // heart area
         int leftIndex = (int) (bitmap.getWidth() * 22.5 / 32);
         int rightIndex = bitmap.getWidth() * 25 / 32;
@@ -788,7 +788,8 @@ public class Preprocess {
         int leftIndex = (int) (bitmap.getWidth() * 14 / 32);
         int rightIndex = bitmap.getWidth() * 30 / 32;
         int topIndex = (int) (bitmap.getHeight() * 12 / 32);
-        int bottomIndex = bitmap.getHeight() * 20 / 32;
+     //   int bottomIndex = bitmap.getHeight() * 20 / 32;
+        int bottomIndex = bitmap.getHeight() * 22 / 32;
 
         for (int i = 0; i < bitmap.getWidth(); i++) {
             for (int j = 0; j < bitmap.getHeight(); j++) {
@@ -813,7 +814,8 @@ public class Preprocess {
         int leftIndex = (int) (bitmap.getWidth() * 14 / 32);
         int rightIndex = bitmap.getWidth() * 30 / 32;
         int topIndex = (int) (bitmap.getHeight() * 12 / 32);
-        int bottomIndex = bitmap.getHeight() * 20 / 32;
+   //     int bottomIndex = bitmap.getHeight() * 20 / 32;
+        int bottomIndex = bitmap.getHeight() * 22 / 32;
 
         Bitmap roiBitmap = Bitmap.createBitmap(rightIndex - leftIndex, bottomIndex - topIndex, Bitmap.Config.RGB_565);
         Canvas cROIkiri = new Canvas(roiBitmap);
@@ -844,7 +846,7 @@ public class Preprocess {
         int leftIndex = (int) (bitmap.getWidth() * 2 / 32);
         int rightIndex = bitmap.getWidth() * 14 / 32;
         int topIndex = (int) (bitmap.getHeight() * 12 / 32);
-        int bottomIndex = bitmap.getHeight() * 20 / 32;
+        int bottomIndex = bitmap.getHeight() * 22 / 32;
 
         for (int i = 0; i < bitmap.getWidth(); i++) {
             for (int j = 0; j < bitmap.getHeight(); j++) {
@@ -867,9 +869,9 @@ public class Preprocess {
     public Bitmap getROIkanan(Bitmap bitmap) {
         //(cardiac vein)//
         int leftIndex = (int) (bitmap.getWidth() * 2 / 32);
-        int rightIndex = bitmap.getWidth() * 14 / 32;
+        int rightIndex = bitmap.getWidth() * 15 / 32;
         int topIndex = (int) (bitmap.getHeight() * 12 / 32);
-        int bottomIndex = bitmap.getHeight() * 20 / 32;
+        int bottomIndex = bitmap.getHeight() * 22 / 32;
 
         Bitmap roiBitmap = Bitmap.createBitmap(rightIndex - leftIndex, bottomIndex - topIndex, Bitmap.Config.RGB_565);
         Canvas cROIkanan = new Canvas(roiBitmap);
